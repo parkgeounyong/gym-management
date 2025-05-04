@@ -38,6 +38,7 @@ dependencies {
 	implementation("org.postgresql:postgresql:42.7.5")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("io.github.microutils:kotlin-logging:3.0.5")
 }
 
 kotlin {
