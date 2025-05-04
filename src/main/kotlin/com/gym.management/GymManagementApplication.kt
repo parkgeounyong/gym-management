@@ -1,4 +1,4 @@
-package com.gym_management
+package com.gym.management
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
