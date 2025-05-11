@@ -1,6 +1,6 @@
 package com.gym.management.config
 
-import com.gym.management.model.ApiResponse
+import com.gym.management.model.util.ApiResponse
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
