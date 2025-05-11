@@ -1,4 +1,4 @@
-package com.gym.management.model.user
+package com.gym.management.model.user.entity
 
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
@@ -13,7 +13,7 @@ class Branch(
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_id_gen")
     @SequenceGenerator(name = "branch_id_gen", sequenceName = "branch_branch_id_seq", allocationSize = 50)
     @Column(name = "branch_id", nullable = false)
-    var id: Int? = null,
+    var id: Int = 0,
 
     @Size(max = 20)
     @NotNull

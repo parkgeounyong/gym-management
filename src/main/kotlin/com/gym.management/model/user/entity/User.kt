@@ -1,4 +1,4 @@
-package com.gym.management.model.user
+package com.gym.management.model.user.entity
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
