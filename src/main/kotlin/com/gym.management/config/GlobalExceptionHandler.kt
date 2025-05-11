@@ -2,6 +2,7 @@ package com.gym.management.config
 
 import com.gym.management.model.util.ApiResponse
 import jakarta.servlet.http.HttpServletRequest
+import mu.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler {
     @ExceptionHandler(Exception::class)
     fun handleGenericException(e: Exception, request: HttpServletRequest): ResponseEntity<Any> {
+        logger.error(e.message)
         return ResponseEntity(
             ApiResponse(
                 code = "E000",
@@ -19,4 +21,5 @@ class GlobalExceptionHandler {
             ), HttpStatus.OK
         )
     }
+    companion object : KLogging()
 }
