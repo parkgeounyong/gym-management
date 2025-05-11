@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "3.4.4"
 	id("io.spring.dependency-management") version "1.1.7"
 	kotlin("plugin.jpa") version "1.9.25"
+	kotlin("kapt") version "1.9.10"
 }
 
 group = "com."
@@ -39,6 +40,9 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("io.github.microutils:kotlin-logging:3.0.5")
+	implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
+	implementation("jakarta.persistence:jakarta.persistence-api")
+	kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
 }
 
 kotlin {
