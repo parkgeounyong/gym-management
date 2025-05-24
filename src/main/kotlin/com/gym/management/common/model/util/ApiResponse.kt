@@ -1,4 +1,4 @@
-package com.gym.management.model.util
+package com.gym.management.common.model.util
 
 data class ApiResponse<T>(
     val code: String = "C000",

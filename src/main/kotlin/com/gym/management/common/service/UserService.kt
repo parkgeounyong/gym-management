@@ -1,7 +1,7 @@
-package com.gym.management.service
+package com.gym.management.common.service
 
-import com.gym.management.repository.user.BranchRepository
-import com.gym.management.repository.user.UserRepository
+import com.gym.management.common.repository.user.BranchRepository
+import com.gym.management.common.repository.user.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
