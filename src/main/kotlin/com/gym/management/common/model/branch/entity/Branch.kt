@@ -1,5 +1,6 @@
-package com.gym.management.common.model.user.entity
+package com.gym.management.common.model.branch.entity
 
+import com.gym.management.common.model.branch.dto.BranchDTO
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
@@ -13,29 +14,37 @@ class Branch(
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_id_gen")
     @SequenceGenerator(name = "branch_id_gen", sequenceName = "branch_branch_id_seq", allocationSize = 50)
     @Column(name = "branch_id", nullable = false)
-    var id: Int = 0,
+    val id: Int = 0,
 
     @Size(max = 20)
     @NotNull
     @Column(name = "branch_name", nullable = false, length = 20)
-    var branchName: String? = null,
+    val branchName: String,
 
     @Size(max = 100)
     @NotNull
     @Column(name = "branch_address", nullable = false, length = 100)
-    var branchAddress: String? = null,
+    val branchAddress: String,
 
     @NotNull
     @ColumnDefault("now()")
     @Column(name = "branch_created_at", nullable = false)
-    var branchCreatedAt: LocalDateTime? = null,
+    val branchCreatedAt: LocalDateTime,
 
     @NotNull
     @Column(name = "branch_updated_at", nullable = false)
-    var branchUpdatedAt: LocalDateTime? = null,
+    val branchUpdatedAt: LocalDateTime,
 
     @NotNull
     @ColumnDefault("false")
     @Column(name = "branch_deleted", nullable = false)
-    var branchDeleted: Boolean? = false
-)
+    val branchDeleted: Boolean = false
+) {
+    constructor(branchDTO: BranchDTO) : this(
+        branchName = branchDTO.branchName,
+        branchAddress = branchDTO.branchAddress,
+        branchCreatedAt = branchDTO.branchCreatedAt,
+        branchUpdatedAt = branchDTO.branchUpdatedAt,
+        branchDeleted = false
+    )
+}

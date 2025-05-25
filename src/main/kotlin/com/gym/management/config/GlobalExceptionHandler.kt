@@ -1,6 +1,6 @@
 package com.gym.management.config
 
-import com.gym.management.common.model.util.ApiResponse
+import com.gym.management.common.model.ApiResponse
 import jakarta.servlet.http.HttpServletRequest
 import mu.KLogging
 import org.springframework.http.HttpStatus

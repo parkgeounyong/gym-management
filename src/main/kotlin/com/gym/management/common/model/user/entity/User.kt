@@ -1,5 +1,6 @@
 package com.gym.management.common.model.user.entity
 
+import com.gym.management.common.model.user.dto.UserDTO
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -15,43 +16,55 @@ class User(
     @Id
     @Size(max = 20)
     @Column(name = "user_id", nullable = false, length = 20)
-    var userId: String? = null,
+    val userId: String,
 
     @Size(max = 30)
     @NotNull
     @Column(name = "user_password", nullable = false, length = 30)
-    var userPassword: String? = null,
+    val userPassword: String,
 
     @Size(max = 5)
     @NotNull
     @Column(name = "user_role", nullable = false, length = 5)
-    var userRole: String? = null,
+    val userRole: String,
 
     @Size(max = 10)
     @NotNull
     @Column(name = "user_name", nullable = false, length = 10)
-    var userName: String? = null,
+    val userName: String,
 
     @Size(max = 20)
     @NotNull
     @Column(name = "user_phone", nullable = false, length = 20)
-    var userPhone: String? = null,
+    val userPhone: String,
 
     @Size(max = 30)
     @Column(name = "user_email", length = 30)
-    var userEmail: String? = null,
+    val userEmail: String? = null,
 
     @NotNull
     @ColumnDefault("now()")
     @Column(name = "user_created_at", nullable = false)
-    var userCreatedAt: LocalDateTime? = null,
+    val userCreatedAt: LocalDateTime,
 
     @NotNull
     @Column(name = "user_updated_at", nullable = false)
-    var userUpdatedAt: LocalDateTime? = null,
+    val userUpdatedAt: LocalDateTime,
 
     @NotNull
     @ColumnDefault("false")
     @Column(name = "user_deleted", nullable = false)
-    var userDeleted: Boolean? = false
-)
+    val userDeleted: Boolean = false
+) {
+    constructor(userDTO: UserDTO) : this(
+        userId = userDTO.userId,
+        userPassword = userDTO.userPassword,
+        userRole = userDTO.userRole,
+        userName = userDTO.userName,
+        userPhone = userDTO.userPhone,
+        userEmail = userDTO.userEmail,
+        userCreatedAt = userDTO.userCreatedAt,
+        userUpdatedAt = userDTO.userUpdatedAt,
+        userDeleted = userDTO.userDeleted
+    )
+}
