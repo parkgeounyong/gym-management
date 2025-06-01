@@ -18,7 +18,7 @@ class User(
     @Column(name = "user_id", nullable = false, length = 20)
     val userId: String,
 
-    @Size(max = 30)
+    @Size(max = 200)
     @NotNull
     @Column(name = "user_password", nullable = false, length = 30)
     val userPassword: String,
