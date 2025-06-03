@@ -7,6 +7,7 @@ import com.gym.management.common.model.user.dto.UserDTO
 import com.gym.management.common.model.user.entity.User
 import com.gym.management.common.repository.user.UserRepository
 import com.gym.management.config.exception.custom.user.DuplicateIdException
+import com.gym.management.config.exception.custom.user.LoginFailedException
 import org.springframework.stereotype.Service
 
 @Service
@@ -22,8 +23,8 @@ class UserService(
 
     fun login(loginFormDTO: LoginFormDTO): String {
         val user = userRepository.findById(loginFormDTO.userId)
-            .orElseThrow { RuntimeException("User not found") }
-        if (UserUtils.hashSHA256(loginFormDTO.password) != user.userPassword) throw RuntimeException("Wrong password")
+            .orElseThrow { LoginFailedException() }
+        if (UserUtils.hashSHA256(loginFormDTO.password) != user.userPassword) throw LoginFailedException()
         return jwtComponent.generateToken(user.userId)
     }
 
