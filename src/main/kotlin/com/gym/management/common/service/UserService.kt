@@ -1,6 +1,6 @@
 package com.gym.management.common.service
 
-import com.gym.management.common.UserUtils
+import com.gym.management.common.utils.UserUtils
 import com.gym.management.common.model.user.dto.LoginFormDTO
 import com.gym.management.common.model.user.dto.UserDTO
 import com.gym.management.common.model.user.entity.User

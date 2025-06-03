@@ -1,4 +1,4 @@
-package com.gym.management.common
+package com.gym.management.common.utils
 
 import java.security.MessageDigest
 
