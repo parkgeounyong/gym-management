@@ -20,7 +20,7 @@ class DUserService(
         return true
     }
 
-    fun login(loginFormRequest: DLoginFormRequest): Boolean {
+    fun login(loginFormRequest: DLoginFormRequest): String {
         return userService.login(LoginFormDTO(loginFormRequest))
     }
 }

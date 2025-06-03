@@ -24,7 +24,7 @@ class DUserController(
     @PostMapping("/device/user/login")
     fun login(
         @RequestBody loginRequest: DLoginFormRequest
-    ): ApiResponse<Boolean> {
+    ): ApiResponse<String> {
         return ApiResponse(data = userService.login(loginRequest))
     }
 }
