@@ -3,7 +3,7 @@ package com.gym.management.common.model.user.dto
 import com.gym.management.admin.model.user.ACreateUserRequest
 import com.gym.management.common.UserUtils
 import com.gym.management.common.model.user.entity.User
-import com.gym.management.device.model.DCreateUserRequest
+import com.gym.management.device.model.user.DCreateUserRequest
 import java.time.LocalDateTime
 
 data class UserDTO(

@@ -2,7 +2,7 @@ package com.gym.management.common.model.branch.dto
 
 import com.gym.management.admin.model.user.ACreateUserRequest
 import com.gym.management.common.model.branch.entity.Branch
-import com.gym.management.device.model.DCreateUserRequest
+import com.gym.management.device.model.user.DCreateUserRequest
 import java.time.LocalDateTime
 
 data class BranchDTO(

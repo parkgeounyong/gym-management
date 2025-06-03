@@ -1,4 +1,4 @@
-package com.gym.management.device.model
+package com.gym.management.device.model.user
 
 data class DCreateUserRequest(
     val userId: String,
