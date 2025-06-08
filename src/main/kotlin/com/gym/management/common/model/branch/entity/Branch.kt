@@ -1,6 +1,8 @@
 package com.gym.management.common.model.branch.entity
 
 import com.gym.management.common.model.branch.dto.BranchDTO
+import com.gym.management.common.model.user.dto.UserDTO
+import com.gym.management.common.model.user.entity.User
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
@@ -38,13 +40,18 @@ class Branch(
     @NotNull
     @ColumnDefault("false")
     @Column(name = "branch_deleted", nullable = false)
-    val branchDeleted: Boolean = false
+    val branchDeleted: Boolean = false,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    val user: User
 ) {
-    constructor(branchDTO: BranchDTO) : this(
+    constructor(branchDTO: BranchDTO, userDto: UserDTO) : this(
         branchName = branchDTO.branchName,
         branchAddress = branchDTO.branchAddress,
         branchCreatedAt = branchDTO.branchCreatedAt,
         branchUpdatedAt = branchDTO.branchUpdatedAt,
-        branchDeleted = false
+        branchDeleted = false,
+        user = User(userDto)
     )
 }
