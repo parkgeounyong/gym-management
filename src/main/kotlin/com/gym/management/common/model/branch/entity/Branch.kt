@@ -1,8 +1,6 @@
 package com.gym.management.common.model.branch.entity
 
 import com.gym.management.common.model.branch.dto.BranchDTO
-import com.gym.management.common.model.user.dto.UserDTO
-import com.gym.management.common.model.user.entity.User
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
@@ -10,7 +8,7 @@ import org.hibernate.annotations.ColumnDefault
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "branch")
+@Table(name = "gym_branch")
 class Branch(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_id_gen")
@@ -42,16 +40,16 @@ class Branch(
     @Column(name = "branch_deleted", nullable = false)
     val branchDeleted: Boolean = false,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    val user: User
+    @NotNull
+    @Column(name = "user_id", nullable = false, length = 20)
+    val userId: String,
 ) {
-    constructor(branchDTO: BranchDTO, userDto: UserDTO) : this(
+    constructor(branchDTO: BranchDTO) : this(
         branchName = branchDTO.branchName,
         branchAddress = branchDTO.branchAddress,
         branchCreatedAt = branchDTO.branchCreatedAt,
         branchUpdatedAt = branchDTO.branchUpdatedAt,
         branchDeleted = false,
-        user = User(userDto)
+        userId = branchDTO.userId
     )
 }

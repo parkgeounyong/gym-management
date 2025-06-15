@@ -11,7 +11,7 @@ import org.hibernate.annotations.ColumnDefault
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "\"user\"")
+@Table(name = "gym_user")
 class User(
     @Id
     @Size(max = 20)

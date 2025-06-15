@@ -1,6 +1,5 @@
 package com.gym.management.common.model.branch.dto
 
-import com.gym.management.admin.model.user.ACreateUserRequest
 import com.gym.management.common.model.branch.entity.Branch
 import com.gym.management.device.model.user.DCreateUserRequest
 import java.time.LocalDateTime
@@ -11,7 +10,8 @@ data class BranchDTO(
     val branchAddress: String,
     val branchCreatedAt: LocalDateTime,
     val branchUpdatedAt: LocalDateTime,
-    val branchDeleted: Boolean = false
+    val branchDeleted: Boolean = false,
+    val userId: String,
 ) {
     constructor(branch: Branch) : this(
         id = branch.id,
@@ -19,15 +19,8 @@ data class BranchDTO(
         branchAddress = branch.branchAddress,
         branchCreatedAt = branch.branchCreatedAt,
         branchUpdatedAt = branch.branchUpdatedAt,
-        branchDeleted = branch.branchDeleted
-    )
-
-    constructor(aCreateUserRequest: ACreateUserRequest) : this(
-        branchName = aCreateUserRequest.branchName,
-        branchAddress = aCreateUserRequest.branchAddress,
-        branchCreatedAt = LocalDateTime.now(),
-        branchUpdatedAt = LocalDateTime.now(),
-        branchDeleted = false
+        branchDeleted = branch.branchDeleted,
+        userId = branch.userId
     )
 
     constructor(dCreateUserRequest: DCreateUserRequest) : this(
@@ -35,6 +28,7 @@ data class BranchDTO(
         branchAddress = dCreateUserRequest.branchAddress,
         branchCreatedAt = LocalDateTime.now(),
         branchUpdatedAt = LocalDateTime.now(),
-        branchDeleted = false
+        branchDeleted = false,
+        userId = dCreateUserRequest.userId
     )
 }

@@ -1,6 +1,5 @@
 package com.gym.management.common.model.user.dto
 
-import com.gym.management.admin.model.user.ACreateUserRequest
 import com.gym.management.common.utils.UserUtils
 import com.gym.management.common.model.user.entity.User
 import com.gym.management.device.model.user.DCreateUserRequest
@@ -27,18 +26,6 @@ data class UserDTO(
         userCreatedAt = user.userCreatedAt,
         userUpdatedAt = user.userUpdatedAt,
         userDeleted = user.userDeleted
-    )
-
-    constructor(aCreateUserRequest: ACreateUserRequest): this(
-        userId = aCreateUserRequest.userId,
-        userPassword = UserUtils.hashSHA256(aCreateUserRequest.userPassword),
-        userRole = aCreateUserRequest.userRole,
-        userName = aCreateUserRequest.userName,
-        userPhone = aCreateUserRequest.userPhone,
-        userEmail = aCreateUserRequest.userEmail,
-        userCreatedAt = LocalDateTime.now(),
-        userUpdatedAt = LocalDateTime.now(),
-        userDeleted = false
     )
 
     constructor(dCreateUserRequest: DCreateUserRequest): this(

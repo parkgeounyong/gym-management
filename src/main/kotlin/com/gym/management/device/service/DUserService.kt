@@ -16,7 +16,7 @@ class DUserService(
 ) {
     fun createUser(createUserRequest: DCreateUserRequest): Boolean {
         userService.createUser(UserDTO(createUserRequest))
-        branchService.createBranch(BranchDTO(createUserRequest), UserDTO(createUserRequest))
+        branchService.createBranch(BranchDTO(createUserRequest))
         return true
     }
 
