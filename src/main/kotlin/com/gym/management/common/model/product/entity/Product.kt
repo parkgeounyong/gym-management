@@ -1,10 +1,12 @@
 package com.gym.management.common.model.product.entity
 
+import com.gym.management.common.model.product.dto.ProductDTO
 import com.gym.management.common.model.product.entity.id.ProductId
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
 @IdClass(ProductId::class)
@@ -28,6 +30,10 @@ class Product(
     val productName: String,
 
     @NotNull
+    @Column(name = "product_price", nullable = false)
+    val productPrice: BigDecimal,
+
+    @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "product_created_at", nullable = false)
     val productCreatedAt: LocalDateTime,
@@ -45,4 +51,15 @@ class Product(
     @NotNull
     @Column(name = "user_id", nullable = false)
     val userId: String
-)
+) {
+    constructor(productDTO: ProductDTO) : this(
+        productCode = productDTO.productCode,
+        branchId = productDTO.branchId,
+        productName = productDTO.productName,
+        productPrice = productDTO.productPrice,
+        productCreatedAt = productDTO.productCreatedAt,
+        productUpdatedAt = productDTO.productUpdatedAt,
+        productDeleted = productDTO.productDeleted,
+        userId = productDTO.userId
+    )
+}

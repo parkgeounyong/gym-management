@@ -14,7 +14,7 @@ data class UserDTO(
     val userEmail: String? = null,
     val userCreatedAt: LocalDateTime,
     val userUpdatedAt: LocalDateTime,
-    val userDeleted: Boolean = false
+    val userDeleted: Boolean
 ) {
     constructor(user: User) : this(
         userId = user.userId,
@@ -28,7 +28,7 @@ data class UserDTO(
         userDeleted = user.userDeleted
     )
 
-    constructor(dCreateUserRequest: DCreateUserRequest): this(
+    constructor(dCreateUserRequest: DCreateUserRequest) : this(
         userId = dCreateUserRequest.userId,
         userPassword = UserUtils.hashSHA256(dCreateUserRequest.userPassword),
         userRole = dCreateUserRequest.userRole,
