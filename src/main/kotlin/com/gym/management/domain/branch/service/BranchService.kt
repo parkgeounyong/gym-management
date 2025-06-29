@@ -1,8 +1,8 @@
-package com.gym.management.common.service
+package com.gym.management.domain.branch.service
 
-import com.gym.management.common.model.branch.dto.BranchDTO
-import com.gym.management.common.model.branch.entity.Branch
-import com.gym.management.common.repository.branch.BranchRepository
+import com.gym.management.domain.branch.model.dto.BranchDTO
+import com.gym.management.domain.branch.model.entity.Branch
+import com.gym.management.domain.branch.repository.BranchRepository
 import org.springframework.stereotype.Service
 
 @Service

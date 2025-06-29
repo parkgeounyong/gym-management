@@ -1,11 +1,11 @@
 package com.gym.management.domain.user.service
 
 import com.gym.management.common.component.JwtComponent
-import com.gym.management.common.model.branch.dto.BranchDTO
+import com.gym.management.domain.branch.model.dto.BranchDTO
 import com.gym.management.domain.user.repository.UserRepository
 import com.gym.management.domain.user.model.dto.LoginFormDTO
 import com.gym.management.domain.user.model.dto.UserDTO
-import com.gym.management.common.service.BranchService
+import com.gym.management.domain.branch.service.BranchService
 import com.gym.management.common.utils.UserUtils
 import com.gym.management.config.exception.custom.user.DuplicateIdException
 import com.gym.management.config.exception.custom.user.LoginFailedException

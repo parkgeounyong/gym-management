@@ -1,6 +1,6 @@
-package com.gym.management.common.model.branch.entity
+package com.gym.management.domain.branch.model.entity
 
-import com.gym.management.common.model.branch.dto.BranchDTO
+import com.gym.management.domain.branch.model.dto.BranchDTO
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
