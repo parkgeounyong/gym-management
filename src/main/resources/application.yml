@@ -10,3 +10,14 @@ spring:
 jwt:
   secret: "XLIV+clZ0MliFD/15iCkbwElPnoitFP9JAfuT6TJRN9Sk5cyX5LZJF5Ug8dDXIcdkCL5ppcD/VHwY3ycG4pyvg==/"
   expired: "86400000"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: qwer1234
