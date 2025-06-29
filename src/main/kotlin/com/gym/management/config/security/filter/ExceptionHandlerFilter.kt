@@ -22,7 +22,7 @@ class ExceptionHandlerFilter(
         try {
             filterChain.doFilter(request, response)
         } catch (e: Exception) {
-            handleAuthenticationException(response, "SE001", "알 수 없는 오류입니다", e)
+            handleAuthenticationException(response, "SE001", "알 수 없는 인증 오류입니다", e)
         }
     }
 
