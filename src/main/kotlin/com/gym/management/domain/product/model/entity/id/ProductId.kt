@@ -1,4 +1,4 @@
-package com.gym.management.common.model.product.entity.id
+package com.gym.management.domain.product.model.entity.id
 
 import java.io.Serializable
 

@@ -1,7 +1,7 @@
-package com.gym.management.common.model.product.entity
+package com.gym.management.domain.product.model.entity
 
-import com.gym.management.common.model.product.dto.ProductDTO
-import com.gym.management.common.model.product.entity.id.ProductId
+import com.gym.management.domain.product.model.dto.ProductDTO
+import com.gym.management.domain.product.model.entity.id.ProductId
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size

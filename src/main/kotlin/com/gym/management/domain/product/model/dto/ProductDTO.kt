@@ -1,7 +1,6 @@
-package com.gym.management.common.model.product.dto
+package com.gym.management.domain.product.model.dto
 
-import com.gym.management.common.model.product.entity.Product
-import com.gym.management.device.model.product.DCreateProductRequest
+import com.gym.management.domain.product.model.entity.Product
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -26,14 +25,14 @@ data class ProductDTO(
         userId = product.userId
     )
 
-    constructor(dCreateProductRequest: DCreateProductRequest) : this(
-        productCode = dCreateProductRequest.productCode,
-        branchId = dCreateProductRequest.branchId,
-        productName = dCreateProductRequest.productName,
-        productPrice = dCreateProductRequest.productPrice,
-        productCreatedAt = LocalDateTime.now(),
-        productUpdatedAt = LocalDateTime.now(),
-        productDeleted = 'N',
-        userId = dCreateProductRequest.userId
+    constructor(createProductRequest: CreateProductRequest) : this(
+        productCode = createProductRequest.productCode,
+        branchId = createProductRequest.branchId,
+        productName = createProductRequest.productName,
+        productPrice = createProductRequest.productPrice,
+        productCreatedAt = createProductRequest.productCreatedAt,
+        productUpdatedAt = createProductRequest.productUpdatedAt,
+        productDeleted = createProductRequest.productDeleted,
+        userId = createProductRequest.userId
     )
 }
