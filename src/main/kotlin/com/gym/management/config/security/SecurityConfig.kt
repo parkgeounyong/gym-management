@@ -1,5 +1,6 @@
 package com.gym.management.config.security
 
+import com.gym.management.config.security.filter.ExceptionHandlerFilter
 import com.gym.management.config.security.filter.JwtAuthenticationFilter
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType
 import io.swagger.v3.oas.annotations.security.SecurityScheme
@@ -12,7 +13,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = "bearerAuth", scheme = "bearer")
 class SecurityConfig(
-    private val jwtAuthenticationFilter: JwtAuthenticationFilter
+    private val jwtAuthenticationFilter: JwtAuthenticationFilter,
+    private val exceptionHandlerFilter: ExceptionHandlerFilter
 ) {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -21,13 +23,16 @@ class SecurityConfig(
             .authorizeHttpRequests { auth ->
                 auth
                     .requestMatchers(
-                        "/swagger-ui/**", "/v3/api-docs/**", "/*/user/**",
+                        "/swagger-ui/**", "/v3/api-docs/**", "/*/user/login",
                     ).permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter::class.java
+            ).addFilterBefore(
+                exceptionHandlerFilter,
+                jwtAuthenticationFilter::class.java
             )
         return http.build()
     }
