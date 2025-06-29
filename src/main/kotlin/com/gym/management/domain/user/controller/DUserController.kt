@@ -1,9 +1,9 @@
-package com.gym.management.device.controller
+package com.gym.management.domain.user.controller
 
 import com.gym.management.common.model.ApiResponse
-import com.gym.management.device.model.user.DCreateUserRequest
-import com.gym.management.device.model.user.DLoginFormRequest
-import com.gym.management.device.service.DUserService
+import com.gym.management.domain.user.model.dto.CreateUserRequest
+import com.gym.management.domain.user.service.DUserService
+import com.gym.management.domain.user.model.dto.LoginFormDTO
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -16,15 +16,15 @@ class DUserController(
 ) {
     @PostMapping("/device/user/users")
     fun createUser(
-        @RequestBody createUserRequest: DCreateUserRequest
+        @RequestBody createUserRequest: CreateUserRequest
     ): ApiResponse<Boolean> {
         return ApiResponse(data = userService.createUser(createUserRequest))
     }
 
     @PostMapping("/device/user/login")
     fun login(
-        @RequestBody loginRequest: DLoginFormRequest
+        @RequestBody loginFormDTO: LoginFormDTO
     ): ApiResponse<String> {
-        return ApiResponse(data = userService.login(loginRequest))
+        return ApiResponse(data = userService.login(loginFormDTO))
     }
 }

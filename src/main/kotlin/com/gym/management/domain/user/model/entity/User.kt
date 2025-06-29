@@ -1,6 +1,6 @@
-package com.gym.management.common.model.user.entity
+package com.gym.management.domain.user.model.entity
 
-import com.gym.management.common.model.user.dto.UserDTO
+import com.gym.management.domain.user.model.dto.UserDTO
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id

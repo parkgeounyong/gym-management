@@ -1,8 +1,7 @@
-package com.gym.management.common.model.user.dto
+package com.gym.management.domain.user.model.dto
 
 import com.gym.management.common.utils.UserUtils
-import com.gym.management.common.model.user.entity.User
-import com.gym.management.device.model.user.DCreateUserRequest
+import com.gym.management.domain.user.model.entity.User
 import java.time.LocalDateTime
 
 data class UserDTO(
@@ -28,13 +27,13 @@ data class UserDTO(
         userDeleted = user.userDeleted
     )
 
-    constructor(dCreateUserRequest: DCreateUserRequest) : this(
-        userId = dCreateUserRequest.userId,
-        userPassword = UserUtils.hashSHA256(dCreateUserRequest.userPassword),
-        userRole = dCreateUserRequest.userRole,
-        userName = dCreateUserRequest.userName,
-        userPhone = dCreateUserRequest.userPhone,
-        userEmail = dCreateUserRequest.userEmail,
+    constructor(createUserRequest: CreateUserRequest) : this(
+        userId = createUserRequest.userId,
+        userPassword = UserUtils.hashSHA256(createUserRequest.userPassword),
+        userRole = createUserRequest.userRole,
+        userName = createUserRequest.userName,
+        userPhone = createUserRequest.userPhone,
+        userEmail = createUserRequest.userEmail,
         userCreatedAt = LocalDateTime.now(),
         userUpdatedAt = LocalDateTime.now(),
         userDeleted = false
