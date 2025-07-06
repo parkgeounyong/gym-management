@@ -7,6 +7,7 @@ import java.time.LocalDateTime
 data class ProductDTO(
     val productCode: String,
     val branchId: Int,
+    val procaCode: String,
     val productName: String,
     val productPrice: BigDecimal,
     val productCreatedAt: LocalDateTime,
@@ -17,6 +18,7 @@ data class ProductDTO(
     constructor(product: Product) : this(
         productCode = product.productCode,
         branchId = product.branchId,
+        procaCode = product.procaCode,
         productName = product.productName,
         productPrice = product.productPrice,
         productCreatedAt = product.productCreatedAt,
@@ -28,6 +30,7 @@ data class ProductDTO(
     constructor(createProductRequest: CreateProductRequest) : this(
         productCode = createProductRequest.productCode,
         branchId = createProductRequest.branchId,
+        procaCode = createProductRequest.categoryCode,
         productName = createProductRequest.productName,
         productPrice = createProductRequest.productPrice,
         productCreatedAt = createProductRequest.productCreatedAt,

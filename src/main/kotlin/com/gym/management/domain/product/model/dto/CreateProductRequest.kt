@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 data class CreateProductRequest(
     val productCode: String,
     val branchId: Int,
+    val categoryCode: String,
     val productName: String,
     val productPrice: BigDecimal,
     val productCreatedAt: LocalDateTime = LocalDateTime.now(),

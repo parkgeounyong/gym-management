@@ -24,6 +24,11 @@ class Product(
     @Column(name = "branch_id", nullable = false)
     val branchId: Int,
 
+    @Size(max = 10)
+    @NotNull
+    @Column(name = "proca_code", nullable = false, length = 10)
+    val procaCode: String,
+
     @Size(max = 20)
     @NotNull
     @Column(name = "product_name", nullable = false, length = 20)
@@ -55,6 +60,7 @@ class Product(
     constructor(productDTO: ProductDTO) : this(
         productCode = productDTO.productCode,
         branchId = productDTO.branchId,
+        procaCode = productDTO.procaCode,
         productName = productDTO.productName,
         productPrice = productDTO.productPrice,
         productCreatedAt = productDTO.productCreatedAt,
