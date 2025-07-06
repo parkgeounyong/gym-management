@@ -52,9 +52,9 @@ class User(
     val userUpdatedAt: LocalDateTime,
 
     @NotNull
-    @ColumnDefault("false")
+    @ColumnDefault("'n'")
     @Column(name = "user_deleted", nullable = false)
-    val userDeleted: Boolean = false
+    val userDeleted: Char
 ) {
     constructor(userDTO: UserDTO) : this(
         userId = userDTO.userId,

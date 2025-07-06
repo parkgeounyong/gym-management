@@ -1,7 +1,6 @@
 package com.gym.management.domain.user.model.dto
 
 import com.gym.management.common.utils.UserUtils
-import com.gym.management.domain.user.model.entity.User
 import java.time.LocalDateTime
 
 data class UserDTO(
@@ -13,20 +12,8 @@ data class UserDTO(
     val userEmail: String? = null,
     val userCreatedAt: LocalDateTime,
     val userUpdatedAt: LocalDateTime,
-    val userDeleted: Boolean
+    val userDeleted: Char
 ) {
-    constructor(user: User) : this(
-        userId = user.userId,
-        userPassword = user.userPassword,
-        userRole = user.userRole,
-        userName = user.userName,
-        userPhone = user.userPhone,
-        userEmail = user.userEmail,
-        userCreatedAt = user.userCreatedAt,
-        userUpdatedAt = user.userUpdatedAt,
-        userDeleted = user.userDeleted
-    )
-
     constructor(createUserRequest: CreateUserRequest) : this(
         userId = createUserRequest.userId,
         userPassword = UserUtils.hashSHA256(createUserRequest.userPassword),
@@ -36,6 +23,6 @@ data class UserDTO(
         userEmail = createUserRequest.userEmail,
         userCreatedAt = LocalDateTime.now(),
         userUpdatedAt = LocalDateTime.now(),
-        userDeleted = false
+        userDeleted = 'N'
     )
 }

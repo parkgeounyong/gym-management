@@ -1,3 +1,0 @@
-ALTER TABLE "user"
-ALTER COLUMN user_password TYPE VARCHAR(200),
-ALTER COLUMN user_password SET NOT NULL;

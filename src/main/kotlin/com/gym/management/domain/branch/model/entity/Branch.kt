@@ -36,9 +36,9 @@ class Branch(
     val branchUpdatedAt: LocalDateTime,
 
     @NotNull
-    @ColumnDefault("false")
+    @ColumnDefault("'n'")
     @Column(name = "branch_deleted", nullable = false)
-    val branchDeleted: Boolean = false,
+    val branchDeleted: Char,
 
     @NotNull
     @Column(name = "user_id", nullable = false, length = 20)
@@ -49,7 +49,7 @@ class Branch(
         branchAddress = branchDTO.branchAddress,
         branchCreatedAt = branchDTO.branchCreatedAt,
         branchUpdatedAt = branchDTO.branchUpdatedAt,
-        branchDeleted = false,
+        branchDeleted = 'N',
         userId = branchDTO.userId
     )
 }

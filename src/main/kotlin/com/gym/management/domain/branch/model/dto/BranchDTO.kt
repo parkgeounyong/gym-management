@@ -10,7 +10,7 @@ data class BranchDTO(
     val branchAddress: String,
     val branchCreatedAt: LocalDateTime,
     val branchUpdatedAt: LocalDateTime,
-    val branchDeleted: Boolean,
+    val branchDeleted: Char,
     val userId: String,
 ) {
     constructor(branch: Branch) : this(
@@ -29,7 +29,7 @@ data class BranchDTO(
         branchAddress = createUserRequest.branchAddress,
         branchCreatedAt = LocalDateTime.now(),
         branchUpdatedAt = LocalDateTime.now(),
-        branchDeleted = false,
+        branchDeleted = 'N',
         userId = createUserRequest.userId
     )
 }
