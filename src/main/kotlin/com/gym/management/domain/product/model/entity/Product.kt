@@ -60,7 +60,7 @@ class Product(
     constructor(productDTO: ProductDTO) : this(
         productCode = productDTO.productCode,
         branchId = productDTO.branchId,
-        procaCode = productDTO.procaCode,
+        procaCode = productDTO.productCategoryCode,
         productName = productDTO.productName,
         productPrice = productDTO.productPrice,
         productCreatedAt = productDTO.productCreatedAt,
