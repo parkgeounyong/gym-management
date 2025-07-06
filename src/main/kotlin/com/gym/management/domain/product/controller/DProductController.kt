@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 class DProductController(
     private val dProductService: DProductService,
 ) {
-    @PostMapping("/device/product/products")
+    @PostMapping("/device/products")
     fun createProduct(
         @RequestBody productDTO: ProductDTO
     ): ApiResponse<ProductDTO> {
@@ -20,7 +20,7 @@ class DProductController(
         )
     }
 
-    @GetMapping("/device/product/products")
+    @GetMapping("/device/products")
     fun findBy(
         @RequestParam("branchId") branchId: Int,
     ): ApiResponse<List<ProductDTO>> {

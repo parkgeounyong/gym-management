@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 class DCategoryController(
     private val dCategoryService: DCategoryService
 ) {
-    @PostMapping("/device/category/categories")
+    @PostMapping("/device/categories")
     fun createProductCategory(
         @RequestBody productCategoryDTO: ProductCategoryDTO
     ): ApiResponse<ProductCategoryDTO> {
@@ -20,7 +20,7 @@ class DCategoryController(
         )
     }
 
-    @GetMapping("/device/category/categories")
+    @GetMapping("/device/categories")
     fun findBy(
         @RequestParam("branchId") branchId: Int,
     ): ApiResponse<List<ProductCategoryDTO>> {
