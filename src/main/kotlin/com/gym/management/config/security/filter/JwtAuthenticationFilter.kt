@@ -1,6 +1,6 @@
 package com.gym.management.config.security.filter
 
-import com.gym.management.common.component.JwtComponent
+import com.gym.management.common.utils.JwtUtils
 import com.gym.management.domain.user.model.dto.UserInfoDTO
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
@@ -13,9 +13,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
-class JwtAuthenticationFilter(
-    private val jwtComponent: JwtComponent
-) : OncePerRequestFilter() {
+class JwtAuthenticationFilter : OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
@@ -26,7 +24,7 @@ class JwtAuthenticationFilter(
             filterChain.doFilter(request, response)
             return
         }
-        val claims = jwtComponent.buildClaims(authorizationHeader)
+        val claims = JwtUtils.buildClaims(authorizationHeader)
         val userInfo = UserInfoDTO(
             userId = claims["userId"].toString(),
         )
