@@ -15,4 +15,8 @@ class DProductService(
         val result = productRepository.save(Product(productDTO))
         return ProductDTO(result)
     }
+
+    fun findBy(branchId: Int): List<ProductDTO> {
+        return productRepository.findByBranchId(branchId).map { ProductDTO(it) }
+    }
 }
