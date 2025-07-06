@@ -1,5 +1,6 @@
 package com.gym.management.domain.category.model.entity
 
+import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.model.entity.id.ProductCategoryId
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
@@ -45,4 +46,14 @@ class ProductCategory(
     @NotNull
     @Column(name = "user_id", nullable = false)
     val userId: String,
-)
+) {
+    constructor(productCategoryDTO: ProductCategoryDTO): this(
+        procaCode = productCategoryDTO.productCategoryCode,
+        branchId = productCategoryDTO.branchId,
+        procaName = productCategoryDTO.productCategoryName,
+        procaCreatedAt = productCategoryDTO.productCategoryCreatedAt,
+        procaUpdatedAt = productCategoryDTO.productCategoryUpdatedAt,
+        procaDeleted = productCategoryDTO.productCategoryDeleted,
+        userId = productCategoryDTO.userId
+    )
+}

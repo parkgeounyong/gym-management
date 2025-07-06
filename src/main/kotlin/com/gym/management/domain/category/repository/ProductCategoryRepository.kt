@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ProductCategoryRepository : JpaRepository<ProductCategory, ProductCategoryId> {
+    fun findByBranchId(branchId: Int): MutableList<ProductCategory>
 }
