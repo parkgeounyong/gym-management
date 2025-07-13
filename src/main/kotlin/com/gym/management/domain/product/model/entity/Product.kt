@@ -14,15 +14,15 @@ import java.time.LocalDateTime
 @Table(name = "gym_product")
 class Product(
     @Id
+    @NotNull
+    @Column(name = "branch_id", nullable = false)
+    val branchId: Int,
+
+    @Id
     @Size(max = 10)
     @NotNull
     @Column(name = "product_code", nullable = false, length = 10)
     val productCode: String,
-
-    @Id
-    @NotNull
-    @Column(name = "branch_id", nullable = false)
-    val branchId: Int,
 
     @Size(max = 10)
     @NotNull
