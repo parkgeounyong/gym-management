@@ -3,7 +3,7 @@ package com.gym.management.domain.sale.model.entity.id
 import java.io.Serializable
 
 
-data class SalesDetailId(
+data class SaleDetailId(
 
     var saleId: Int? = null,
 

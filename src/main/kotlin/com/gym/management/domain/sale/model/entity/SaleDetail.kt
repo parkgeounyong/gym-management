@@ -1,16 +1,17 @@
 package com.gym.management.domain.sale.model.entity
 
-import com.gym.management.domain.sale.model.entity.id.SalesDetailId
+import com.gym.management.domain.sale.model.dto.SaleDetailDTO
+import com.gym.management.domain.sale.model.entity.id.SaleDetailId
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
-@IdClass(SalesDetailId::class)
+@IdClass(SaleDetailId::class)
 @Entity
-@Table(name = "gym_sales_detail")
-class SalesDetail(
+@Table(name = "gym_sale_detail")
+class SaleDetail(
     @Id
     @NotNull
     @Column(name = "sale_id", nullable = false)
@@ -51,4 +52,16 @@ class SalesDetail(
     @NotNull
     @Column(name = "salde_created_at", nullable = false)
     val saldeCreatedAt: LocalDateTime,
-)
+) {
+    constructor(saleDetailDTO: SaleDetailDTO) : this(
+        saleId = saleDetailDTO.saleId,
+        branchId = saleDetailDTO.branchId,
+        saldeOrderSeq = saleDetailDTO.saldeOrderSeq,
+        procaCode = saleDetailDTO.procaCode,
+        productCode = saleDetailDTO.productCode,
+        saldeProductPrice = saleDetailDTO.saldeProductPrice,
+        saldeCount = saleDetailDTO.saldeCount,
+        saldeTotalAmount = saleDetailDTO.saldeTotalAmount,
+        saldeCreatedAt = LocalDateTime.now()
+    )
+}
