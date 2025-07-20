@@ -21,11 +21,11 @@ class DProductController(
     }
 
     @PutMapping("/device/products")
-    fun updateProduct(
+    fun upsertProduct(
         @RequestBody productList: List<ProductDTO>
     ): ApiResponse<Boolean> {
         return ApiResponse(
-            data = dProductService.updateProduct(productList)
+            data = dProductService.upsertProduct(productList)
         )
     }
 
