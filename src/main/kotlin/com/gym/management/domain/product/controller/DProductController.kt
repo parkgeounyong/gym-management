@@ -20,6 +20,15 @@ class DProductController(
         )
     }
 
+    @PutMapping("/device/products")
+    fun updateProduct(
+        @RequestBody productList: List<ProductDTO>
+    ): ApiResponse<Boolean> {
+        return ApiResponse(
+            data = dProductService.updateProduct(productList)
+        )
+    }
+
     @GetMapping("/device/products")
     fun findBy(
         @RequestParam("branchId") branchId: Int,
