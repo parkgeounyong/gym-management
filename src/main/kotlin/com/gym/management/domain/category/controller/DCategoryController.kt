@@ -20,6 +20,15 @@ class DCategoryController(
         )
     }
 
+    @PutMapping("/device/categories")
+    fun upsertProductCategory(
+        @RequestBody productCategoryList: List<ProductCategoryDTO>
+    ): ApiResponse<Boolean> {
+        return ApiResponse(
+            data = dCategoryService.upsertProductCategory(productCategoryList)
+        )
+    }
+
     @GetMapping("/device/categories")
     fun findBy(
         @RequestParam("branchId") branchId: Int,

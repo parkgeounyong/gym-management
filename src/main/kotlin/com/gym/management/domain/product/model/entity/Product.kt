@@ -27,16 +27,16 @@ class Product(
     @Size(max = 10)
     @NotNull
     @Column(name = "proca_code", nullable = false, length = 10)
-    val procaCode: String,
+    var procaCode: String,
 
     @Size(max = 20)
     @NotNull
     @Column(name = "product_name", nullable = false, length = 20)
-    val productName: String,
+    var productName: String,
 
     @NotNull
     @Column(name = "product_price", nullable = false)
-    val productPrice: BigDecimal,
+    var productPrice: BigDecimal,
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
@@ -46,16 +46,16 @@ class Product(
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "product_updated_at", nullable = false)
-    val productUpdatedAt: LocalDateTime,
+    var productUpdatedAt: LocalDateTime,
 
     @NotNull
     @ColumnDefault("'n'")
     @Column(name = "product_deleted", nullable = false, length = Integer.MAX_VALUE)
-    val productDeleted: Char,
+    var productDeleted: Char,
 
     @NotNull
     @Column(name = "user_id", nullable = false)
-    val userId: String
+    var userId: String
 ) {
     constructor(productDTO: ProductDTO) : this(
         productCode = productDTO.productCode,
@@ -68,4 +68,13 @@ class Product(
         productDeleted = productDTO.productDeleted,
         userId = productDTO.userId
     )
+
+    fun updateBy(productDTO: ProductDTO) {
+        procaCode = productDTO.productCategoryCode
+        productName = productDTO.productName
+        productPrice = productDTO.productPrice
+        productUpdatedAt = LocalDateTime.now()
+        productDeleted = productDTO.productDeleted
+        userId = productDTO.userId
+    }
 }
