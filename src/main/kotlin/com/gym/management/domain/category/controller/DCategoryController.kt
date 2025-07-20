@@ -21,11 +21,11 @@ class DCategoryController(
     }
 
     @PutMapping("/device/categories")
-    fun updateProductCategory(
+    fun upsertProductCategory(
         @RequestBody productCategoryList: List<ProductCategoryDTO>
     ): ApiResponse<Boolean> {
         return ApiResponse(
-            data = dCategoryService.updateProductCategory(productCategoryList)
+            data = dCategoryService.upsertProductCategory(productCategoryList)
         )
     }
 
