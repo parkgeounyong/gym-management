@@ -5,6 +5,7 @@ import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.Comment
 import java.time.LocalDateTime
 
 @Entity
@@ -27,18 +28,20 @@ class Branch(
     val branchAddress: String,
 
     @NotNull
-    @ColumnDefault("now()")
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "branch_created_at", nullable = false)
-    val branchCreatedAt: LocalDateTime,
+    val branchCreatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "branch_updated_at", nullable = false)
-    val branchUpdatedAt: LocalDateTime,
+    val branchUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
-    @ColumnDefault("'n'")
+    @ColumnDefault("'N'")
     @Column(name = "branch_deleted", nullable = false)
-    val branchDeleted: Char,
+    @Comment("삭제 여부, 'Y'는 삭제됨, 'N'은 사용 중")
+    val branchDeleted: Char = 'N',
 
     @NotNull
     @Column(name = "user_id", nullable = false, length = 20)
@@ -49,7 +52,6 @@ class Branch(
         branchAddress = branchDTO.branchAddress,
         branchCreatedAt = branchDTO.branchCreatedAt,
         branchUpdatedAt = branchDTO.branchUpdatedAt,
-        branchDeleted = 'N',
         userId = branchDTO.userId
     )
 }
