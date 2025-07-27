@@ -31,17 +31,17 @@ class ProductCategory(
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "proca_created_at", nullable = false)
-    val procaCreatedAt: LocalDateTime,
+    val procaCreatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "proca_updated_at", nullable = false)
-    var procaUpdatedAt: LocalDateTime,
+    var procaUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
-    @ColumnDefault("'n'")
+    @ColumnDefault("'N'")
     @Column(name = "proca_deleted", nullable = false, length = Integer.MAX_VALUE)
-    var procaDeleted: Char,
+    var procaDeleted: Char = 'N',
 
     @NotNull
     @Column(name = "user_id", nullable = false)
