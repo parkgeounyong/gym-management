@@ -43,18 +43,19 @@ class User(
     val userEmail: String? = null,
 
     @NotNull
-    @ColumnDefault("now()")
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "user_created_at", nullable = false)
-    val userCreatedAt: LocalDateTime,
+    val userCreatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "user_updated_at", nullable = false)
-    val userUpdatedAt: LocalDateTime,
+    val userUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
-    @ColumnDefault("'n'")
+    @ColumnDefault("'N'")
     @Column(name = "user_deleted", nullable = false)
-    val userDeleted: Char
+    val userDeleted: Char = 'N'
 ) {
     constructor(userDTO: UserDTO) : this(
         userId = userDTO.userId,
