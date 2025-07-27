@@ -8,6 +8,7 @@ import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.Comment
 import java.time.LocalDateTime
 
 @Entity
@@ -43,18 +44,20 @@ class User(
     val userEmail: String? = null,
 
     @NotNull
-    @ColumnDefault("now()")
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "user_created_at", nullable = false)
-    val userCreatedAt: LocalDateTime,
+    val userCreatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "user_updated_at", nullable = false)
-    val userUpdatedAt: LocalDateTime,
+    val userUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
-    @ColumnDefault("'n'")
+    @ColumnDefault("'N'")
     @Column(name = "user_deleted", nullable = false)
-    val userDeleted: Char
+    @Comment("삭제 여부, 'Y'는 삭제됨, 'N'은 사용 중")
+    val userDeleted: Char = 'N'
 ) {
     constructor(userDTO: UserDTO) : this(
         userId = userDTO.userId,

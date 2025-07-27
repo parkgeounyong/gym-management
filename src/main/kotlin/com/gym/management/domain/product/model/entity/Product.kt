@@ -6,6 +6,7 @@ import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.Comment
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -41,17 +42,18 @@ class Product(
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "product_created_at", nullable = false)
-    val productCreatedAt: LocalDateTime,
+    val productCreatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "product_updated_at", nullable = false)
-    var productUpdatedAt: LocalDateTime,
+    var productUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
-    @ColumnDefault("'n'")
+    @ColumnDefault("'N'")
     @Column(name = "product_deleted", nullable = false, length = Integer.MAX_VALUE)
-    var productDeleted: Char,
+    @Comment("삭제 여부, 'Y'는 삭제됨, 'N'은 사용 중")
+    var productDeleted: Char = 'N',
 
     @NotNull
     @Column(name = "user_id", nullable = false)

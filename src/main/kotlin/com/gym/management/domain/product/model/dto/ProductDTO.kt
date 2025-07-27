@@ -12,7 +12,7 @@ data class ProductDTO(
     val productPrice: BigDecimal,
     val productCreatedAt: LocalDateTime = LocalDateTime.now(),
     val productUpdatedAt: LocalDateTime = LocalDateTime.now(),
-    val productDeleted: Char,
+    val productDeleted: Char = 'N',
     val userId: String
 ) {
     constructor(product: Product) : this(

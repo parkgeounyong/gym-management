@@ -9,7 +9,7 @@ data class ProductCategoryDTO(
     val productCategoryName: String,
     val productCategoryCreatedAt: LocalDateTime = LocalDateTime.now(),
     val productCategoryUpdatedAt: LocalDateTime = LocalDateTime.now(),
-    val productCategoryDeleted: Char,
+    val productCategoryDeleted: Char = 'N',
     val userId: String,
 ) {
     constructor(productCategory: ProductCategory) : this(
