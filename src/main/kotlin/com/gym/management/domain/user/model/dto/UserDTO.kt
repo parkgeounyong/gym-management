@@ -10,9 +10,9 @@ data class UserDTO(
     val userName: String,
     val userPhone: String,
     val userEmail: String? = null,
-    val userCreatedAt: LocalDateTime,
-    val userUpdatedAt: LocalDateTime,
-    val userDeleted: Char
+    val userCreatedAt: LocalDateTime = LocalDateTime.now(),
+    val userUpdatedAt: LocalDateTime = LocalDateTime.now(),
+    val userDeleted: Char = 'N'
 ) {
     constructor(createUserRequest: CreateUserRequest) : this(
         userId = createUserRequest.userId,
