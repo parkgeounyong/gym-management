@@ -41,17 +41,17 @@ class Product(
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "product_created_at", nullable = false)
-    val productCreatedAt: LocalDateTime,
+    val productCreatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "product_updated_at", nullable = false)
-    var productUpdatedAt: LocalDateTime,
+    var productUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
-    @ColumnDefault("'n'")
+    @ColumnDefault("'N'")
     @Column(name = "product_deleted", nullable = false, length = Integer.MAX_VALUE)
-    var productDeleted: Char,
+    var productDeleted: Char = 'N',
 
     @NotNull
     @Column(name = "user_id", nullable = false)
