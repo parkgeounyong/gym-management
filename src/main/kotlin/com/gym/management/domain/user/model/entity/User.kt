@@ -8,6 +8,7 @@ import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.Comment
 import java.time.LocalDateTime
 
 @Entity
@@ -55,6 +56,7 @@ class User(
     @NotNull
     @ColumnDefault("'N'")
     @Column(name = "user_deleted", nullable = false)
+    @Comment("삭제 여부, 'Y'는 삭제됨, 'N'은 사용 중")
     val userDeleted: Char = 'N'
 ) {
     constructor(userDTO: UserDTO) : this(

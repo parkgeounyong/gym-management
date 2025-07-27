@@ -6,6 +6,7 @@ import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.Comment
 import java.time.LocalDateTime
 
 @IdClass(ProductCategoryId::class)
@@ -41,6 +42,7 @@ class ProductCategory(
     @NotNull
     @ColumnDefault("'N'")
     @Column(name = "proca_deleted", nullable = false, length = Integer.MAX_VALUE)
+    @Comment("삭제 여부, 'Y'는 삭제됨, 'N'은 사용 중")
     var procaDeleted: Char = 'N',
 
     @NotNull

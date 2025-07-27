@@ -6,6 +6,7 @@ import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.Comment
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -51,6 +52,7 @@ class Product(
     @NotNull
     @ColumnDefault("'N'")
     @Column(name = "product_deleted", nullable = false, length = Integer.MAX_VALUE)
+    @Comment("삭제 여부, 'Y'는 삭제됨, 'N'은 사용 중")
     var productDeleted: Char = 'N',
 
     @NotNull
