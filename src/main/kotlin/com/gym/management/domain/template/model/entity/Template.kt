@@ -18,38 +18,38 @@ class Template(
     val branchId: Int,
 
     @Id
-@Size(max = 20)
-@NotNull
-@Column(name = "template_code", nullable = false, length = 20)
-val templateCode: String,
+    @Size(max = 20)
+    @NotNull
+    @Column(name = "template_code", nullable = false, length = 20)
+    val templateCode: String,
 
-@Size(max = 100)
-@NotNull
-@Column(name = "template_name", nullable = false, length = 100)
-val templateName: String,
+    @Size(max = 100)
+    @NotNull
+    @Column(name = "template_name", nullable = false, length = 100)
+    val templateName: String,
 
-@NotNull
-@ColumnDefault("CURRENT_TIMESTAMP")
-@Column(name = "template_start_at", nullable = false)
-val templateStartAt: LocalDateTime = LocalDateTime.now(),
+    @NotNull
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "template_start_at", nullable = false)
+    val templateStartAt: LocalDateTime = LocalDateTime.now(),
 
-@NotNull
-@ColumnDefault("(CURRENT_TIMESTAMP + '100 years')")
-@Column(name = "template_end_at", nullable = false)
-val templateEndAt: LocalDateTime = LocalDateTime.now().withYear(100),
+    @NotNull
+    @ColumnDefault("(CURRENT_TIMESTAMP + '100 years')")
+    @Column(name = "template_end_at", nullable = false)
+    val templateEndAt: LocalDateTime = LocalDateTime.now().withYear(100),
 
-@NotNull
-@ColumnDefault("CURRENT_TIMESTAMP")
-@Column(name = "template_created_at", nullable = false)
-val templateCreatedAt: LocalDateTime = LocalDateTime.now(),
+    @NotNull
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "template_created_at", nullable = false)
+    val templateCreatedAt: LocalDateTime = LocalDateTime.now(),
 
-@NotNull
-@ColumnDefault("CURRENT_TIMESTAMP")
-@Column(name = "template_updated_at", nullable = false)
-val templateUpdatedAt: LocalDateTime = LocalDateTime.now(),
+    @NotNull
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "template_updated_at", nullable = false)
+    val templateUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
-@NotNull
-@ColumnDefault("'N'")
-@Column(name = "template_deleted", nullable = false, length = Integer.MAX_VALUE)
-val templateDeleted: Char = 'N',
+    @NotNull
+    @ColumnDefault("'N'")
+    @Column(name = "template_deleted", nullable = false, length = Integer.MAX_VALUE)
+    val templateDeleted: Char = 'N',
 )
