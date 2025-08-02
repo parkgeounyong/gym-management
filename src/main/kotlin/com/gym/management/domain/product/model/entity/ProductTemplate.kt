@@ -6,6 +6,7 @@ import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
 @IdClass(ProductTemplateId::class)
@@ -36,6 +37,10 @@ class ProductTemplate(
     val proteName: String,
 
     @NotNull
+    @Column(name = "prote_price", nullable = false)
+    var protePrice: BigDecimal,
+
+    @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "prote_created_at", nullable = false)
     val proteCreatedAt: LocalDateTime = LocalDateTime.now(),
@@ -57,6 +62,7 @@ class ProductTemplate(
         templateCode = productTemplateDTO.templateCode,
         productCode = productTemplateDTO.productCode,
         proteName = productTemplateDTO.proteName,
+        protePrice = productTemplateDTO.protePrice,
         proteCreatedAt = LocalDateTime.now(),
         proteUpdatedAt = LocalDateTime.now(),
         proteDeleted = 'N'
