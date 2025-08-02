@@ -1,5 +1,6 @@
 package com.gym.management.domain.template.model.entity
 
+import com.gym.management.domain.template.model.dto.TemplateDTO
 import com.gym.management.domain.template.model.entity.id.TemplateId
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
@@ -52,4 +53,15 @@ class Template(
     @ColumnDefault("'N'")
     @Column(name = "template_deleted", nullable = false, length = Integer.MAX_VALUE)
     val templateDeleted: Char = 'N',
-)
+) {
+    constructor(templateDTO: TemplateDTO) : this(
+        branchId = templateDTO.branchId,
+        templateCode = templateDTO.templateCode,
+        templateName = templateDTO.templateName,
+        templateStartAt = templateDTO.templateStartAt,
+        templateEndAt = templateDTO.templateEndAt,
+        templateCreatedAt = LocalDateTime.now(),
+        templateUpdatedAt = LocalDateTime.now(),
+        templateDeleted = 'N',
+    )
+}

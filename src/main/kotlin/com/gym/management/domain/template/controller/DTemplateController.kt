@@ -1,10 +1,11 @@
 package com.gym.management.domain.template.controller
 
 import com.gym.management.common.model.ApiResponse
-import com.gym.management.domain.template.model.entity.Template
+import com.gym.management.domain.template.model.dto.TemplateDTO
 import com.gym.management.domain.template.service.DTemplateService
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController
 class DTemplateController(
     private val dtemplateService: DTemplateService,
 ) {
-    @GetMapping("/device/templates")
-    fun createSales(): ApiResponse<MutableList<Template>> {
+    @PostMapping("/device/templates")
+    fun createTemplates(
+        @RequestBody templateDTO: TemplateDTO
+    ): ApiResponse<TemplateDTO> {
         return ApiResponse(
-            data = dtemplateService.selectAll()
+            data = dtemplateService.createTemplates(templateDTO)
         )
     }
 }
