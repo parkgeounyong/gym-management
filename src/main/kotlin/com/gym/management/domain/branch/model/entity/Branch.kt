@@ -50,8 +50,8 @@ class Branch(
     constructor(branchDTO: BranchDTO) : this(
         branchName = branchDTO.branchName,
         branchAddress = branchDTO.branchAddress,
-        branchCreatedAt = branchDTO.branchCreatedAt,
-        branchUpdatedAt = branchDTO.branchUpdatedAt,
+        branchCreatedAt = LocalDateTime.now(),
+        branchUpdatedAt = LocalDateTime.now(),
         userId = branchDTO.userId
     )
 }
