@@ -30,6 +30,10 @@ class Template(
     val templateName: String,
 
     @NotNull
+    @Column(name = "template_priority", nullable = false)
+    val templatePriority: Int,
+
+    @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "template_start_at", nullable = false)
     val templateStartAt: LocalDateTime = LocalDateTime.now(),
@@ -58,6 +62,7 @@ class Template(
         branchId = templateDTO.branchId,
         templateCode = templateDTO.templateCode,
         templateName = templateDTO.templateName,
+        templatePriority = templateDTO.templatePriority,
         templateStartAt = templateDTO.templateStartAt,
         templateEndAt = templateDTO.templateEndAt,
         templateCreatedAt = LocalDateTime.now(),
