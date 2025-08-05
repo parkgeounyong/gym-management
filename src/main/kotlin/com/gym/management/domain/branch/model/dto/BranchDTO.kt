@@ -1,7 +1,7 @@
 package com.gym.management.domain.branch.model.dto
 
 import com.gym.management.domain.branch.model.entity.Branch
-import com.gym.management.domain.user.model.dto.CreateUserRequest
+import com.gym.management.domain.user.model.dto.UserUpsertRequest
 import java.time.LocalDateTime
 
 data class BranchDTO(
@@ -23,13 +23,13 @@ data class BranchDTO(
         userId = branch.userId
     )
 
-    constructor(createUserRequest: CreateUserRequest) : this(
+    constructor(userUpsertRequest: UserUpsertRequest) : this(
         id = 0,
-        branchName = createUserRequest.branchName,
-        branchAddress = createUserRequest.branchAddress,
+        branchName = userUpsertRequest.branchName,
+        branchAddress = userUpsertRequest.branchAddress,
         branchCreatedAt = LocalDateTime.now(),
         branchUpdatedAt = LocalDateTime.now(),
         branchDeleted = 'N',
-        userId = createUserRequest.userId
+        userId = userUpsertRequest.userId
     )
 }

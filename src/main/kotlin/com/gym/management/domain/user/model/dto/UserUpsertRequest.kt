@@ -1,6 +1,6 @@
 package com.gym.management.domain.user.model.dto
 
-data class CreateUserRequest(
+data class UserUpsertRequest(
     val userId: String,
     val userPassword: String,
     val userRole: String,

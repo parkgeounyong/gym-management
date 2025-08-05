@@ -1,7 +1,7 @@
 package com.gym.management.domain.user.controller
 
 import com.gym.management.common.model.ApiResponse
-import com.gym.management.domain.user.model.dto.CreateUserRequest
+import com.gym.management.domain.user.model.dto.UserUpsertRequest
 import com.gym.management.domain.user.service.DUserService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,8 +15,8 @@ class DUserController(
 ) {
     @PostMapping("/device/users")
     fun createUser(
-        @RequestBody createUserRequest: CreateUserRequest
+        @RequestBody userUpsertRequest: UserUpsertRequest
     ): ApiResponse<Boolean> {
-        return ApiResponse(data = userService.createUser(createUserRequest))
+        return ApiResponse(data = userService.createUser(userUpsertRequest))
     }
 }
