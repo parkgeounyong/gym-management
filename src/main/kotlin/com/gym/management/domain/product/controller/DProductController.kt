@@ -2,9 +2,11 @@ package com.gym.management.domain.product.controller
 
 import com.gym.management.common.model.ApiResponse
 import com.gym.management.domain.product.model.dto.ProductDTO
+import com.gym.management.domain.product.model.dto.ProductTemplateDTO
 import com.gym.management.domain.product.service.DProductService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDateTime
 
 @RestController
 @Tag(name = "Product")
@@ -32,9 +34,19 @@ class DProductController(
     @GetMapping("/device/products")
     fun findBy(
         @RequestParam("branchId") branchId: Int,
+        @RequestParam("localDateTime") localDateTime: LocalDateTime = LocalDateTime.now(),
     ): ApiResponse<List<ProductDTO>> {
         return ApiResponse(
-            data = dProductService.findBy(branchId)
+            data = dProductService.findBy(branchId, localDateTime)
+        )
+    }
+
+    @PostMapping("/device/product-templates")
+    fun createProductTemplates(
+        @RequestBody productTemplateDTO: ProductTemplateDTO
+    ): ApiResponse<ProductTemplateDTO> {
+        return ApiResponse(
+            data = dProductService.createProductTemplates(productTemplateDTO)
         )
     }
 }
