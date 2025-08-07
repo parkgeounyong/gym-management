@@ -53,8 +53,8 @@ class ProductCategory(
         procaCode = productCategoryDTO.productCategoryCode,
         branchId = productCategoryDTO.branchId,
         procaName = productCategoryDTO.productCategoryName,
-        procaCreatedAt = productCategoryDTO.productCategoryCreatedAt,
-        procaUpdatedAt = productCategoryDTO.productCategoryUpdatedAt,
+        procaCreatedAt = LocalDateTime.now(),
+        procaUpdatedAt = LocalDateTime.now(),
         procaDeleted = productCategoryDTO.productCategoryDeleted,
         userId = productCategoryDTO.userId
     )

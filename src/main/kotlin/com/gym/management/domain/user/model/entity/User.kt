@@ -66,8 +66,8 @@ class User(
         userName = userDTO.userName,
         userPhone = userDTO.userPhone,
         userEmail = userDTO.userEmail,
-        userCreatedAt = userDTO.userCreatedAt,
-        userUpdatedAt = userDTO.userUpdatedAt,
+        userCreatedAt = LocalDateTime.now(),
+        userUpdatedAt = LocalDateTime.now(),
         userDeleted = userDTO.userDeleted
     )
 }

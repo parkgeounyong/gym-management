@@ -65,8 +65,8 @@ class Product(
         procaCode = productDTO.productCategoryCode,
         productName = productDTO.productName,
         productPrice = productDTO.productPrice,
-        productCreatedAt = productDTO.productCreatedAt,
-        productUpdatedAt = productDTO.productUpdatedAt,
+        productCreatedAt = LocalDateTime.now(),
+        productUpdatedAt = LocalDateTime.now(),
         productDeleted = productDTO.productDeleted,
         userId = productDTO.userId
     )
