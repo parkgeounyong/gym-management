@@ -5,6 +5,7 @@ import com.gym.management.domain.user.model.dto.UserRequest
 import com.gym.management.domain.user.service.DUserService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -18,5 +19,12 @@ class DUserController(
         @RequestBody userRequest: UserRequest
     ): ApiResponse<Boolean> {
         return ApiResponse(data = userService.createUser(userRequest))
+    }
+
+    @PutMapping("/device/users")
+    fun updateUser(
+        @RequestBody userRequest: UserRequest
+    ): ApiResponse<Boolean> {
+        return ApiResponse(data = userService.updateUser(userRequest))
     }
 }

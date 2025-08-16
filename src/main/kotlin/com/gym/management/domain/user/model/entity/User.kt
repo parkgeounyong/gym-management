@@ -1,10 +1,7 @@
 package com.gym.management.domain.user.model.entity
 
 import com.gym.management.domain.user.model.dto.UserDTO
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.ColumnDefault
@@ -32,16 +29,16 @@ class User(
     @Size(max = 10)
     @NotNull
     @Column(name = "user_name", nullable = false, length = 10)
-    val userName: String,
+    var userName: String,
 
     @Size(max = 20)
     @NotNull
     @Column(name = "user_phone", nullable = false, length = 20)
-    val userPhone: String,
+    var userPhone: String,
 
     @Size(max = 30)
     @Column(name = "user_email", length = 30)
-    val userEmail: String? = null,
+    var userEmail: String? = null,
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
@@ -51,13 +48,13 @@ class User(
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "user_updated_at", nullable = false)
-    val userUpdatedAt: LocalDateTime = LocalDateTime.now(),
+    var userUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
     @ColumnDefault("'N'")
     @Column(name = "user_deleted", nullable = false)
     @Comment("삭제 여부, 'Y'는 삭제됨, 'N'은 사용 중")
-    val userDeleted: Char = 'N'
+    val userDeleted: Char = 'N',
 ) {
     constructor(userDTO: UserDTO) : this(
         userId = userDTO.userId,
@@ -68,6 +65,13 @@ class User(
         userEmail = userDTO.userEmail,
         userCreatedAt = LocalDateTime.now(),
         userUpdatedAt = LocalDateTime.now(),
-        userDeleted = userDTO.userDeleted
+        userDeleted = userDTO.userDeleted,
     )
+
+    fun updateBy(userDTO: UserDTO) {
+        userName = userDTO.userName
+        userPhone = userDTO.userPhone
+        userEmail = userDTO.userEmail
+        userUpdatedAt = userDTO.userUpdatedAt
+    }
 }

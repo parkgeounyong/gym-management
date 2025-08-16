@@ -16,7 +16,7 @@ class GlobalExceptionHandler {
         logger.error("Exception occurred", e)
         return ResponseEntity(
             ApiResponse(
-                code = "E000",
+                code = "E999",
                 errorMessage = "확인되지않은 오류입니다",
                 data = null
             ), HttpStatus.OK
