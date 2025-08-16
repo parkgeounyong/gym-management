@@ -15,17 +15,17 @@ class Branch(
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_id_gen")
     @SequenceGenerator(name = "branch_id_gen", sequenceName = "branch_branch_id_seq", allocationSize = 50)
     @Column(name = "branch_id", nullable = false)
-    val id: Int = 0,
+    val branchId: Int = 0,
 
     @Size(max = 20)
     @NotNull
     @Column(name = "branch_name", nullable = false, length = 20)
-    val branchName: String,
+    var branchName: String,
 
     @Size(max = 100)
     @NotNull
     @Column(name = "branch_address", nullable = false, length = 100)
-    val branchAddress: String,
+    var branchAddress: String,
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
@@ -35,7 +35,7 @@ class Branch(
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "branch_updated_at", nullable = false)
-    val branchUpdatedAt: LocalDateTime = LocalDateTime.now(),
+    var branchUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
     @ColumnDefault("'N'")
@@ -45,13 +45,26 @@ class Branch(
 
     @NotNull
     @Column(name = "user_id", nullable = false, length = 20)
-    val userId: String,
+    var userId: String,
+
+    @NotNull
+    @Column(name = "branch_boss_user_id", nullable = false, length = 20)
+    var branchBossUserId: String,
 ) {
     constructor(branchDTO: BranchDTO) : this(
         branchName = branchDTO.branchName,
         branchAddress = branchDTO.branchAddress,
         branchCreatedAt = branchDTO.branchCreatedAt,
         branchUpdatedAt = branchDTO.branchUpdatedAt,
-        userId = branchDTO.userId
+        userId = branchDTO.userId,
+        branchBossUserId = branchDTO.branchBossUserId,
     )
+
+    fun updateBy(branchDTO: BranchDTO) {
+        branchName = branchDTO.branchName
+        branchAddress = branchDTO.branchAddress
+        branchUpdatedAt = branchDTO.branchUpdatedAt
+        userId = branchDTO.userId
+        branchBossUserId = branchDTO.branchBossUserId
+    }
 }
