@@ -1,11 +1,11 @@
 package com.gym.management.domain.user.service
 
-import com.gym.management.config.exception.custom.DomainException
 import com.gym.management.domain.branch.model.dto.BranchDTO
 import com.gym.management.domain.user.repository.UserRepository
 import com.gym.management.domain.user.model.dto.UserDTO
 import com.gym.management.domain.branch.service.BranchService
 import com.gym.management.config.exception.custom.user.DuplicateIdException
+import com.gym.management.config.exception.custom.user.UserNotFoundException
 import com.gym.management.domain.user.model.dto.UserRequest
 import com.gym.management.domain.user.model.entity.User
 import org.springframework.stereotype.Service
@@ -28,7 +28,7 @@ class DUserService(
     fun updateUser(userRequest: UserRequest): Boolean {
         val userDTO = UserDTO(userRequest)
         userRepository.findById(userRequest.userId)
-            .orElseThrow { DomainException("User not found while updating user") }
+            .orElseThrow { UserNotFoundException() }
             .updateBy(userDTO)
         branchService.updateBranch(BranchDTO(userRequest))
         return true

@@ -1,7 +1,7 @@
 package com.gym.management.config.exception
 
 import com.gym.management.common.model.ApiResponse
-import com.gym.management.config.exception.custom.DomainException
+import com.gym.management.config.exception.custom.CustomException
 import jakarta.servlet.http.HttpServletRequest
 import mu.KLogging
 import org.springframework.http.HttpStatus
@@ -23,8 +23,8 @@ class GlobalExceptionHandler {
         )
     }
 
-    @ExceptionHandler(DomainException::class)
-    fun handleDomainException(e: DomainException, request: HttpServletRequest): ResponseEntity<Any> {
+    @ExceptionHandler(CustomException::class)
+    fun handleDomainException(e: CustomException, request: HttpServletRequest): ResponseEntity<Any> {
         return ResponseEntity(
             ApiResponse(
                 code = e.code,
@@ -33,5 +33,6 @@ class GlobalExceptionHandler {
             ), HttpStatus.OK
         )
     }
+
     companion object : KLogging()
 }

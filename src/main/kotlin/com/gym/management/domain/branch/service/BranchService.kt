@@ -1,6 +1,6 @@
 package com.gym.management.domain.branch.service
 
-import com.gym.management.config.exception.custom.DomainException
+import com.gym.management.config.exception.custom.branch.BranchNotFoundException
 import com.gym.management.domain.branch.model.dto.BranchDTO
 import com.gym.management.domain.branch.model.entity.Branch
 import com.gym.management.domain.branch.repository.BranchRepository
@@ -19,7 +19,7 @@ class BranchService(
     @Transactional
     fun updateBranch(branchDTO: BranchDTO): Boolean {
         branchRepository.findById(branchDTO.branchId)
-            .orElseThrow{ DomainException("User not found while updating user") }
+            .orElseThrow { BranchNotFoundException() }
             .updateBy(branchDTO)
         return true
     }
