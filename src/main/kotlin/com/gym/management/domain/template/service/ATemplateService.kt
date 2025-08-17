@@ -1,9 +1,12 @@
 package com.gym.management.domain.template.service
 
+import com.gym.management.config.exception.custom.template.TemplateNotFoundException
 import com.gym.management.domain.template.model.dto.TemplateDTO
 import com.gym.management.domain.template.model.entity.Template
+import com.gym.management.domain.template.model.entity.id.TemplateId
 import com.gym.management.domain.template.repository.TemplateRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ATemplateService(
@@ -11,6 +14,14 @@ class ATemplateService(
 ) {
     fun createTemplates(templateDTO: TemplateDTO): TemplateDTO {
         val result = templateRepository.save(Template(templateDTO))
+        return TemplateDTO(result)
+    }
+
+    @Transactional
+    fun updateTemplates(templateDTO: TemplateDTO): TemplateDTO {
+        val result = templateRepository.findById(TemplateId(templateDTO.branchId, templateDTO.templateCode))
+            .orElseThrow { TemplateNotFoundException() }
+            .updateBy(templateDTO)
         return TemplateDTO(result)
     }
 }

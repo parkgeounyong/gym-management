@@ -5,6 +5,7 @@ import com.gym.management.domain.template.model.dto.TemplateDTO
 import com.gym.management.domain.template.service.ATemplateService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,6 +20,15 @@ class ATemplateController(
     ): ApiResponse<TemplateDTO> {
         return ApiResponse(
             data = aTemplateService.createTemplates(templateDTO)
+        )
+    }
+
+    @PutMapping("/admin/templates")
+    fun updateTemplates(
+        @RequestBody templateDTO: TemplateDTO
+    ): ApiResponse<TemplateDTO> {
+        return ApiResponse(
+            data = aTemplateService.updateTemplates(templateDTO)
         )
     }
 }
