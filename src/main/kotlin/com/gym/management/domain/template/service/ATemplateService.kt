@@ -6,7 +6,7 @@ import com.gym.management.domain.template.repository.TemplateRepository
 import org.springframework.stereotype.Service
 
 @Service
-class DTemplateService(
+class ATemplateService(
     private val templateRepository: TemplateRepository,
 ) {
     fun createTemplates(templateDTO: TemplateDTO): TemplateDTO {
