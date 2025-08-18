@@ -8,7 +8,7 @@ import com.gym.management.domain.user.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class DAuthService(
+class AuthService(
     private val userRepository: UserRepository,
 ) {
     fun login(loginFormDTO: LoginFormDTO): String {
