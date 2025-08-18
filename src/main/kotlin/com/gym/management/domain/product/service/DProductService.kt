@@ -2,12 +2,9 @@ package com.gym.management.domain.product.service
 
 import com.gym.management.domain.product.repository.ProductRepository
 import com.gym.management.domain.product.model.dto.ProductDTO
-import com.gym.management.domain.product.model.dto.ProductTemplateDTO
 import com.gym.management.domain.product.model.entity.Product
-import com.gym.management.domain.product.model.entity.ProductTemplate
 import com.gym.management.domain.product.model.entity.id.ProductId
 import com.gym.management.domain.product.repository.ProductDslRepository
-import com.gym.management.domain.product.repository.ProductTemplateRepository
 import jakarta.persistence.EntityManager
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -17,7 +14,6 @@ import java.time.LocalDateTime
 class DProductService(
     private val productRepository: ProductRepository,
     private val entityManager: EntityManager,
-    private val productTemplateRepository: ProductTemplateRepository,
     private val productDslRepository: ProductDslRepository
 ) {
     fun createProduct(productDTO: ProductDTO): ProductDTO {
@@ -55,10 +51,5 @@ class DProductService(
 
     fun findBy(branchId: Int, localDateTime: LocalDateTime): List<ProductDTO> {
         return productDslRepository.findBy(branchId, localDateTime)
-    }
-
-    fun createProductTemplates(productTemplateDTO: ProductTemplateDTO): ProductTemplateDTO {
-        val result = productTemplateRepository.save(ProductTemplate(productTemplateDTO))
-        return ProductTemplateDTO(result)
     }
 }
