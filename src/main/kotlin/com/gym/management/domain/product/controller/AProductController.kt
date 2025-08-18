@@ -5,6 +5,7 @@ import com.gym.management.domain.product.model.dto.ProductTemplateDTO
 import com.gym.management.domain.product.service.AProductService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,6 +20,15 @@ class AProductController(
     ): ApiResponse<ProductTemplateDTO> {
         return ApiResponse(
             data = aProductService.createProductTemplates(productTemplateDTO)
+        )
+    }
+
+    @PutMapping("/admin/product-templates")
+    fun updateProductTemplates(
+        @RequestBody productTemplateDTO: ProductTemplateDTO
+    ): ApiResponse<ProductTemplateDTO> {
+        return ApiResponse(
+            data = aProductService.updateProductTemplates(productTemplateDTO)
         )
     }
 }
