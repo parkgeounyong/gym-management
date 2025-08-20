@@ -14,13 +14,13 @@ data class UserDTO(
     val userUpdatedAt: LocalDateTime = LocalDateTime.now(),
     val userDeleted: Char = 'N'
 ) {
-    constructor(userRequest: UserRequest) : this(
-        userId = userRequest.userId,
-        userPassword = UserUtils.hashSHA256(userRequest.userPassword),
-        userRole = userRequest.userRole,
-        userName = userRequest.userName,
-        userPhone = userRequest.userPhone,
-        userEmail = userRequest.userEmail,
+    constructor(dUserRequest: DUserRequest) : this(
+        userId = dUserRequest.userId,
+        userPassword = UserUtils.hashSHA256(dUserRequest.userPassword),
+        userRole = dUserRequest.userRole,
+        userName = dUserRequest.userName,
+        userPhone = dUserRequest.userPhone,
+        userEmail = dUserRequest.userEmail,
         userCreatedAt = LocalDateTime.now(),
         userUpdatedAt = LocalDateTime.now(),
         userDeleted = 'N'
