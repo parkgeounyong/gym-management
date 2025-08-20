@@ -35,4 +35,25 @@ data class BranchDTO(
         userId = dUserRequest.userId,
         branchBossUserId = dUserRequest.userId,
     )
+
+    constructor(aCreateBranchRequest: ACreateBranchRequest) : this(
+        branchId = 0,
+        branchName = aCreateBranchRequest.branchName,
+        branchAddress = aCreateBranchRequest.branchAddress,
+        branchCreatedAt = LocalDateTime.now(),
+        branchUpdatedAt = LocalDateTime.now(),
+        branchDeleted = 'N',
+        userId = aCreateBranchRequest.userId,
+        branchBossUserId = aCreateBranchRequest.userId,
+    )
+
+    constructor(aUpdateBranchRequest: AUpdateBranchRequest) : this(
+        branchId = aUpdateBranchRequest.branchId,
+        branchName = aUpdateBranchRequest.branchName,
+        branchAddress = aUpdateBranchRequest.branchAddress,
+        branchUpdatedAt = LocalDateTime.now(),
+        branchDeleted = aUpdateBranchRequest.branchDeleted,
+        userId = aUpdateBranchRequest.userId,
+        branchBossUserId = aUpdateBranchRequest.userId,
+    )
 }
