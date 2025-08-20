@@ -51,7 +51,7 @@ class Branch(
     @Column(name = "branch_boss_user_id", nullable = false, length = 20)
     var branchBossUserId: String,
 ) {
-    constructor(branchDTO: BranchDTO) : this(
+    constructor(branchDTO: BranchDTO): this(
         branchName = branchDTO.branchName,
         branchAddress = branchDTO.branchAddress,
         branchCreatedAt = branchDTO.branchCreatedAt,
@@ -60,11 +60,12 @@ class Branch(
         branchBossUserId = branchDTO.branchBossUserId,
     )
 
-    fun updateBy(branchDTO: BranchDTO) {
+    fun updateBy(branchDTO: BranchDTO): Branch{
         branchName = branchDTO.branchName
         branchAddress = branchDTO.branchAddress
         branchUpdatedAt = branchDTO.branchUpdatedAt
         userId = branchDTO.userId
         branchBossUserId = branchDTO.branchBossUserId
+        return this
     }
 }
