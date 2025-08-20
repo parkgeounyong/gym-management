@@ -2,6 +2,7 @@ package com.gym.management.domain.branch.model.dto
 
 import com.gym.management.domain.branch.model.entity.Branch
 import com.gym.management.domain.user.model.dto.DCreateUserRequest
+import com.gym.management.domain.user.model.dto.DUpdateUserRequest
 import java.time.LocalDateTime
 
 data class BranchDTO(
@@ -34,6 +35,17 @@ data class BranchDTO(
         branchDeleted = 'N',
         userId = dCreateUserRequest.userId,
         branchBossUserId = dCreateUserRequest.userId,
+    )
+
+    constructor(dUpdateUserRequest: DUpdateUserRequest) : this(
+        branchId = dUpdateUserRequest.branchId,
+        branchName = dUpdateUserRequest.branchName,
+        branchAddress = dUpdateUserRequest.branchAddress,
+        branchCreatedAt = LocalDateTime.now(),
+        branchUpdatedAt = LocalDateTime.now(),
+        branchDeleted = 'N',
+        userId = dUpdateUserRequest.userId,
+        branchBossUserId = dUpdateUserRequest.userId,
     )
 
     constructor(aCreateBranchRequest: ACreateBranchRequest) : this(

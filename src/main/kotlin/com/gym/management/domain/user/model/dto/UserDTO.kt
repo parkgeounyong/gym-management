@@ -25,4 +25,16 @@ data class UserDTO(
         userUpdatedAt = LocalDateTime.now(),
         userDeleted = 'N'
     )
+
+    constructor(dUpdateUserRequest: DUpdateUserRequest) : this(
+        userId = dUpdateUserRequest.userId,
+        userPassword = UserUtils.hashSHA256(dUpdateUserRequest.userPassword),
+        userRole = dUpdateUserRequest.userRole,
+        userName = dUpdateUserRequest.userName,
+        userPhone = dUpdateUserRequest.userPhone,
+        userEmail = dUpdateUserRequest.userEmail,
+        userCreatedAt = LocalDateTime.now(),
+        userUpdatedAt = LocalDateTime.now(),
+        userDeleted = 'N'
+    )
 }
