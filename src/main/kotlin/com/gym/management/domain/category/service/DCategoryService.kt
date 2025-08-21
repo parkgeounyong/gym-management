@@ -14,11 +14,6 @@ class DCategoryService(
     private val productCategoryRepository: ProductCategoryRepository,
     private val entityManager: EntityManager
 ) {
-    fun createProductCategory(productCategoryDTO: ProductCategoryDTO): ProductCategoryDTO {
-        val result = productCategoryRepository.save(ProductCategory(productCategoryDTO))
-        return ProductCategoryDTO(result)
-    }
-
     @Transactional
     fun upsertProductCategory(productCategoryList: List<ProductCategoryDTO>): Boolean {
         val idList = productCategoryList.map { ProductCategoryId(it.productCategoryCode, it.branchId) }

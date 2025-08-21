@@ -2,6 +2,7 @@ package com.gym.management.domain.category.controller
 
 import com.gym.management.common.model.ApiResponse
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
+import com.gym.management.domain.category.service.CategoryService
 import com.gym.management.domain.category.service.DCategoryService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
@@ -9,14 +10,15 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @Tag(name = "Category")
 class DCategoryController(
-    private val dCategoryService: DCategoryService
+    private val dCategoryService: DCategoryService,
+    private val categoryService: CategoryService
 ) {
     @PostMapping("/device/categories")
     fun createProductCategory(
         @RequestBody productCategoryDTO: ProductCategoryDTO
     ): ApiResponse<ProductCategoryDTO> {
         return ApiResponse(
-            data = dCategoryService.createProductCategory(productCategoryDTO)
+            data = categoryService.createProductCategory(productCategoryDTO)
         )
     }
 
