@@ -31,4 +31,14 @@ data class ProductCategoryDTO(
         productCategoryDeleted = 'N',
         userId = aCreateProductCategoryRequest.userId,
     )
+
+    constructor(aUpdateProductCategoryRequest: AUpdateProductCategoryRequest) : this(
+        productCategoryCode = aUpdateProductCategoryRequest.productCategoryCode,
+        branchId = aUpdateProductCategoryRequest.branchId,
+        productCategoryName = aUpdateProductCategoryRequest.productCategoryName,
+        productCategoryCreatedAt = LocalDateTime.now(),
+        productCategoryUpdatedAt = LocalDateTime.now(),
+        productCategoryDeleted = aUpdateProductCategoryRequest.productCategoryDeleted,
+        userId = aUpdateProductCategoryRequest.userId,
+    )
 }
