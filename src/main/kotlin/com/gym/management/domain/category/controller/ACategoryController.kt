@@ -1,7 +1,7 @@
 package com.gym.management.domain.category.controller
 
 import com.gym.management.common.model.ApiResponse
-import com.gym.management.domain.category.model.dto.CreateProductCategoryRequest
+import com.gym.management.domain.category.model.dto.ACreateProductCategoryRequest
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.service.ACategoryService
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -16,10 +16,10 @@ class ACategoryController(
 ) {
     @PostMapping("/admin/categories")
     fun createProductCategory(
-        @RequestBody createProductCategoryRequest: CreateProductCategoryRequest
+        @RequestBody aCreateProductCategoryRequest: ACreateProductCategoryRequest
     ): ApiResponse<ProductCategoryDTO> {
         return ApiResponse(
-            data = aCategoryService.createProductCategory(createProductCategoryRequest)
+            data = aCategoryService.createProductCategory(aCreateProductCategoryRequest)
         )
     }
 }

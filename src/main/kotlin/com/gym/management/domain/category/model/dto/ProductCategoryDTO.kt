@@ -22,13 +22,13 @@ data class ProductCategoryDTO(
         userId = productCategory.userId
     )
 
-    constructor(createProductCategoryRequest: CreateProductCategoryRequest) : this(
-        productCategoryCode = createProductCategoryRequest.productCategoryCode,
-        branchId = createProductCategoryRequest.branchId,
-        productCategoryName = createProductCategoryRequest.productCategoryName,
+    constructor(aCreateProductCategoryRequest: ACreateProductCategoryRequest) : this(
+        productCategoryCode = aCreateProductCategoryRequest.productCategoryCode,
+        branchId = aCreateProductCategoryRequest.branchId,
+        productCategoryName = aCreateProductCategoryRequest.productCategoryName,
         productCategoryCreatedAt = LocalDateTime.now(),
         productCategoryUpdatedAt = LocalDateTime.now(),
         productCategoryDeleted = 'N',
-        userId = createProductCategoryRequest.userId,
+        userId = aCreateProductCategoryRequest.userId,
     )
 }
