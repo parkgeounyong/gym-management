@@ -31,6 +31,27 @@ class AProductController(
         )
     }
 
+    @GetMapping("/admin/product-templates")
+    fun fetchProductTemplate(
+        @RequestParam branchId: Int? = null,
+        @RequestParam templateCode: String? = null,
+        @RequestParam page: Int,
+        @RequestParam size: Int,
+        @RequestParam sortBy: String,
+        @RequestParam direction: String
+    ): ApiResponse<PageResponse<ProductTemplateDTO>> {
+        return ApiResponse(data = aProductService.fetchProductTemplate(branchId, templateCode, page, size, sortBy, direction))
+    }
+
+    @GetMapping("/admin/product-templates/{branchId}")
+    fun findBy(
+        @PathVariable branchId: Int,
+        @RequestParam templateCode: String,
+        @RequestParam productCode: String
+    ): ApiResponse<ProductTemplateDTO> {
+        return ApiResponse(data = aProductService.findBy(branchId, templateCode, productCode))
+    }
+
     @PostMapping("/admin/products")
     fun createProduct(
         @RequestBody productDTO: ProductDTO
@@ -50,7 +71,7 @@ class AProductController(
     }
 
     @GetMapping("/admin/products")
-    fun fetchBranches(
+    fun fetchProduct(
         @RequestParam branchId: Int? = null,
         @RequestParam page: Int,
         @RequestParam size: Int,

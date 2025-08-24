@@ -34,6 +34,34 @@ class AProductService(
         return ProductTemplateDTO(result)
     }
 
+    fun fetchProductTemplate(
+        branchId: Int? = null,
+        templateCode: String? = null,
+        page: Int,
+        size: Int,
+        sortBy: String,
+        direction: String
+    ): PageResponse<ProductTemplateDTO> {
+        val count = productTemplateRepository.countProductTemplate(branchId, templateCode)
+        val items =
+            productTemplateRepository.fetchProductTemplate(branchId, templateCode, page, size, sortBy, direction)
+        return PageResponse(
+            totalCount = count,
+            totalPages = (count + size - 1) / size,
+            page = page,
+            size = size,
+            sortBy = sortBy,
+            direction = direction,
+            items = items
+        )
+    }
+
+    fun findBy(branchId: Int, templateCode: String, productCode: String): ProductTemplateDTO {
+        return ProductTemplateDTO(
+            productTemplateRepository.findById(ProductTemplateId(branchId, templateCode, productCode))
+                .orElseThrow { ProductTemplateNotFoundException() })
+    }
+
     fun createProduct(productDTO: ProductDTO): ProductDTO {
         val result = productRepository.save(Product(productDTO))
         return ProductDTO(result)

@@ -27,7 +27,7 @@ class ABranchController(
     }
 
     @GetMapping("/admin/branches")
-    fun fetchBranches(
+    fun fetchBranch(
         @RequestParam branchId: Int? = null,
         @RequestParam page: Int,
         @RequestParam size: Int,

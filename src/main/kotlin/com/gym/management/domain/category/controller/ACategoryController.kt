@@ -33,7 +33,7 @@ class ACategoryController(
     }
 
     @GetMapping("/admin/categories")
-    fun fetchBranches(
+    fun fetchCategory(
         @RequestParam branchId: Int? = null,
         @RequestParam page: Int,
         @RequestParam size: Int,
