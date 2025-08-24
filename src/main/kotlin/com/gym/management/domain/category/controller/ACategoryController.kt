@@ -43,10 +43,10 @@ class ACategoryController(
         return ApiResponse(data = aCategoryService.fetchProductCategory(branchId, page, size, sortBy, direction))
     }
 
-    @GetMapping("/admin/categories/{branchId}")
+    @GetMapping("/admin/categories/{branchId}/{procaCode}")
     fun findBy(
         @PathVariable branchId: Int,
-        @RequestParam procaCode: String
+        @PathVariable procaCode: String
     ): ApiResponse<ProductCategoryDTO> {
         return ApiResponse(data = aCategoryService.findBy(procaCode, branchId))
     }

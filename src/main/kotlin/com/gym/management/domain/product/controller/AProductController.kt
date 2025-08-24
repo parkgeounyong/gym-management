@@ -43,11 +43,11 @@ class AProductController(
         return ApiResponse(data = aProductService.fetchProductTemplate(branchId, templateCode, page, size, sortBy, direction))
     }
 
-    @GetMapping("/admin/product-templates/{branchId}")
+    @GetMapping("/admin/product-templates/{branchId}/{templateCode}/{productCode}")
     fun findBy(
         @PathVariable branchId: Int,
-        @RequestParam templateCode: String,
-        @RequestParam productCode: String
+        @PathVariable templateCode: String,
+        @PathVariable productCode: String
     ): ApiResponse<ProductTemplateDTO> {
         return ApiResponse(data = aProductService.findBy(branchId, templateCode, productCode))
     }
@@ -81,10 +81,10 @@ class AProductController(
         return ApiResponse(data = aProductService.fetchProduct(branchId, page, size, sortBy, direction))
     }
 
-    @GetMapping("/admin/products/{branchId}")
+    @GetMapping("/admin/products/{branchId}/{productCode}")
     fun findBy(
         @PathVariable branchId: Int,
-        @RequestParam productCode: String
+        @PathVariable productCode: String
     ): ApiResponse<ProductDTO> {
         return ApiResponse(data = aProductService.findBy(branchId, productCode))
     }
