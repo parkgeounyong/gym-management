@@ -67,7 +67,7 @@ class Product(
         productPrice = productDTO.productPrice,
         productCreatedAt = LocalDateTime.now(),
         productUpdatedAt = LocalDateTime.now(),
-        productDeleted = productDTO.productDeleted,
+        productDeleted = 'N',
         userId = productDTO.userId
     )
 
