@@ -36,4 +36,11 @@ class ABranchController(
     ): ApiResponse<PageResponse<BranchDTO>> {
         return ApiResponse(data = aBranchService.fetchBranches(branchId, page, size, sortBy, direction))
     }
+
+    @GetMapping("/admin/branches/{branchId}")
+    fun findBy(
+        @PathVariable branchId: Int
+    ): ApiResponse<BranchDTO> {
+        return ApiResponse(data = aBranchService.findBy(branchId))
+    }
 }
