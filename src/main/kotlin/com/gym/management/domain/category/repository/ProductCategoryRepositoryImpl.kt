@@ -1,9 +1,8 @@
 package com.gym.management.domain.category.repository
 
-import com.gym.management.common.utils.PageUtils
+import com.gym.management.common.utils.QuerydslUtils
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.model.entity.QProductCategory
-import com.querydsl.core.BooleanBuilder
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
 
@@ -16,7 +15,7 @@ class ProductCategoryRepositoryImpl(
         return queryFactory
             .select(pc.count())
             .from(pc)
-            .where(buildProductCategoryPagesCondition(branchId))
+            .where(QuerydslUtils.buildEqualsIfPresent(pc.branchId, branchId))
             .fetchOne()?.toInt() ?: 0
     }
 
@@ -31,17 +30,11 @@ class ProductCategoryRepositoryImpl(
 
         return queryFactory.select(pc)
             .from(pc)
-            .where(buildProductCategoryPagesCondition(branchId))
-            .orderBy(PageUtils.createSort(pc, sortBy, direction))
+            .where(QuerydslUtils.buildEqualsIfPresent(pc.branchId, branchId))
+            .orderBy(QuerydslUtils.createSort(pc, sortBy, direction))
             .offset((page - 1) * size.toLong())
             .limit(size.toLong())
             .fetch()
             .map { ProductCategoryDTO(it) }
-    }
-
-    private fun buildProductCategoryPagesCondition(branchId: Int? = null): BooleanBuilder {
-        return BooleanBuilder().apply {
-            branchId?.let { and(QProductCategory.productCategory.branchId.eq(it)) }
-        }
     }
 }

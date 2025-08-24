@@ -1,9 +1,8 @@
 package com.gym.management.domain.branch.repository
 
-import com.gym.management.common.utils.PageUtils
+import com.gym.management.common.utils.QuerydslUtils
 import com.gym.management.domain.branch.model.dto.BranchDTO
 import com.gym.management.domain.branch.model.entity.QBranch
-import com.querydsl.core.BooleanBuilder
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
 
@@ -16,7 +15,7 @@ class BranchRepositoryImpl(
         return queryFactory
             .select(branch.count())
             .from(branch)
-            .where(buildBranchPagesCondition(branchId))
+            .where(QuerydslUtils.buildEqualsIfPresent(branch.branchId, branchId))
             .fetchOne()?.toInt() ?: 0
     }
 
@@ -31,17 +30,11 @@ class BranchRepositoryImpl(
 
         return queryFactory.select(branch)
             .from(branch)
-            .where(buildBranchPagesCondition(branchId))
-            .orderBy(PageUtils.createSort(branch, sortBy, direction))
+            .where(QuerydslUtils.buildEqualsIfPresent(branch.branchId, branchId))
+            .orderBy(QuerydslUtils.createSort(branch, sortBy, direction))
             .offset((page - 1) * size.toLong())
             .limit(size.toLong())
             .fetch()
             .map { BranchDTO(it) }
-    }
-
-    private fun buildBranchPagesCondition(branchId: Int? = null): BooleanBuilder {
-        return BooleanBuilder().apply {
-            branchId?.let { and(QBranch.branch.branchId.eq(it)) }
-        }
     }
 }
