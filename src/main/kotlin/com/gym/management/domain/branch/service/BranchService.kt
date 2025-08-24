@@ -17,10 +17,10 @@ class BranchService(
     }
 
     @Transactional
-    fun updateBranch(branchDTO: BranchDTO): Boolean {
-        branchRepository.findById(branchDTO.branchId)
+    fun updateBranch(branchDTO: BranchDTO): BranchDTO {
+        val result = branchRepository.findById(branchDTO.branchId)
             .orElseThrow { BranchNotFoundException() }
             .updateBy(branchDTO)
-        return true
+        return BranchDTO(result)
     }
 }

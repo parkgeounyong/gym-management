@@ -68,10 +68,11 @@ class User(
         userDeleted = userDTO.userDeleted,
     )
 
-    fun updateBy(userDTO: UserDTO) {
+    fun updateBy(userDTO: UserDTO): User {
         userName = userDTO.userName
         userPhone = userDTO.userPhone
         userEmail = userDTO.userEmail
         userUpdatedAt = userDTO.userUpdatedAt
+        return this
     }
 }

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @Tag(name = "Auth")
-class DAuthController(
-    private val authService: AuthService
+class AAuthController(
+    private val authService: AuthService,
 ) {
-    @PostMapping("/device/auth/tokens")
+    @PostMapping("/admin/auth/tokens")
     fun login(
         @RequestBody loginFormDTO: LoginFormDTO
     ): ApiResponse<String> {

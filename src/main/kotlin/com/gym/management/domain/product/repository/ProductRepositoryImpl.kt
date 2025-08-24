@@ -1,5 +1,6 @@
 package com.gym.management.domain.product.repository
 
+import com.gym.management.common.utils.QuerydslUtils
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.entity.QProduct
 import com.gym.management.domain.product.model.entity.QProductTemplate
@@ -9,18 +10,14 @@ import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
 
 @Repository
-class ProductDslRepository(
-    private val queryFactory: JPAQueryFactory,
-) {
-    fun findBy(branchId: Int, localDateTime: LocalDateTime): List<ProductDTO> {
+class ProductRepositoryImpl(
+    private val queryFactory: JPAQueryFactory
+) : ProductRepositoryCustom {
+    override fun findBy(branchId: Int, localDateTime: LocalDateTime): List<ProductDTO> {
         val product = QProduct.product
         val productTemplate = QProductTemplate.productTemplate
         val template = QTemplate.template
 
-        //todo product는 상품 관리용도 및 기본값으로 사용하고 실제 데이터는 템플릿에 의존해서 사용하기
-        //실제 사용 내용은 템플릿에서만 지정된다.
-        //todo 기존 마스터 가지고 템플릿 생성시 템플릿 내용 + 상품 목록으로 생성되게 수정
-        //템플릿에 존재하는 상품은 실 데이터를 삭제하는 형식으로 진행(데이터 전부 제거하고 생성)
         return queryFactory.select(
             template.templatePriority,
             productTemplate.branchId,
@@ -59,5 +56,33 @@ class ProductDslRepository(
                     userId = tuple.get(product.userId)!!,
                 )
             }
+    }
+
+    override fun countProduct(branchId: Int?): Int {
+        val product = QProduct.product
+        return queryFactory
+            .select(product.count())
+            .from(product)
+            .where(QuerydslUtils.buildEqualsIfPresent(product.branchId, branchId))
+            .fetchOne()?.toInt() ?: 0
+    }
+
+    override fun fetchProduct(
+        branchId: Int?,
+        page: Int,
+        size: Int,
+        sortBy: String,
+        direction: String
+    ): List<ProductDTO> {
+        val product = QProduct.product
+
+        return queryFactory.select(product)
+            .from(product)
+            .where(QuerydslUtils.buildEqualsIfPresent(product.branchId, branchId))
+            .orderBy(QuerydslUtils.createSort(product, sortBy, direction))
+            .offset((page - 1) * size.toLong())
+            .limit(size.toLong())
+            .fetch()
+            .map { ProductDTO(it) }
     }
 }

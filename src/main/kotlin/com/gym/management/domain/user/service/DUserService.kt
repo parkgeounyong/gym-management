@@ -6,7 +6,8 @@ import com.gym.management.domain.user.model.dto.UserDTO
 import com.gym.management.domain.branch.service.BranchService
 import com.gym.management.config.exception.custom.user.DuplicateIdException
 import com.gym.management.config.exception.custom.user.UserNotFoundException
-import com.gym.management.domain.user.model.dto.UserRequest
+import com.gym.management.domain.user.model.dto.DCreateUserRequest
+import com.gym.management.domain.user.model.dto.DUpdateUserRequest
 import com.gym.management.domain.user.model.entity.User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,21 +17,21 @@ class DUserService(
     private val userRepository: UserRepository,
     private val branchService: BranchService,
 ) {
-    fun createUser(userRequest: UserRequest): Boolean {
-        val userDTO = UserDTO(userRequest)
+    fun createUser(dCreateUserRequest: DCreateUserRequest): Boolean {
+        val userDTO = UserDTO(dCreateUserRequest)
         checkRegisterPossible(userDTO)
         userRepository.save(User(userDTO))
-        branchService.createBranch(BranchDTO(userRequest))
+        branchService.createBranch(BranchDTO(dCreateUserRequest))
         return true
     }
 
     @Transactional
-    fun updateUser(userRequest: UserRequest): Boolean {
-        val userDTO = UserDTO(userRequest)
-        userRepository.findById(userRequest.userId)
+    fun updateUser(dUpdateUserRequest: DUpdateUserRequest): Boolean {
+        val userDTO = UserDTO(dUpdateUserRequest)
+        userRepository.findById(dUpdateUserRequest.userId)
             .orElseThrow { UserNotFoundException() }
             .updateBy(userDTO)
-        branchService.updateBranch(BranchDTO(userRequest))
+        branchService.updateBranch(BranchDTO(dUpdateUserRequest))
         return true
     }
 

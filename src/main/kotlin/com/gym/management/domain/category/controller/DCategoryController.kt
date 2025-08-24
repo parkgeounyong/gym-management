@@ -9,17 +9,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @Tag(name = "Category")
 class DCategoryController(
-    private val dCategoryService: DCategoryService
+    private val dCategoryService: DCategoryService,
 ) {
-    @PostMapping("/device/categories")
-    fun createProductCategory(
-        @RequestBody productCategoryDTO: ProductCategoryDTO
-    ): ApiResponse<ProductCategoryDTO> {
-        return ApiResponse(
-            data = dCategoryService.createProductCategory(productCategoryDTO)
-        )
-    }
-
     @PutMapping("/device/categories")
     fun upsertProductCategory(
         @RequestBody productCategoryList: List<ProductCategoryDTO>

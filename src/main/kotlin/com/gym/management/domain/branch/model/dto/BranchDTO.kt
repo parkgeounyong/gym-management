@@ -1,7 +1,8 @@
 package com.gym.management.domain.branch.model.dto
 
 import com.gym.management.domain.branch.model.entity.Branch
-import com.gym.management.domain.user.model.dto.UserRequest
+import com.gym.management.domain.user.model.dto.DCreateUserRequest
+import com.gym.management.domain.user.model.dto.DUpdateUserRequest
 import java.time.LocalDateTime
 
 data class BranchDTO(
@@ -25,14 +26,46 @@ data class BranchDTO(
         branchBossUserId = branch.branchBossUserId,
     )
 
-    constructor(userRequest: UserRequest) : this(
+    constructor(dCreateUserRequest: DCreateUserRequest) : this(
         branchId = 0,
-        branchName = userRequest.branchName,
-        branchAddress = userRequest.branchAddress,
+        branchName = dCreateUserRequest.branchName,
+        branchAddress = dCreateUserRequest.branchAddress,
         branchCreatedAt = LocalDateTime.now(),
         branchUpdatedAt = LocalDateTime.now(),
         branchDeleted = 'N',
-        userId = userRequest.userId,
-        branchBossUserId = userRequest.userId,
+        userId = dCreateUserRequest.userId,
+        branchBossUserId = dCreateUserRequest.userId,
+    )
+
+    constructor(dUpdateUserRequest: DUpdateUserRequest) : this(
+        branchId = dUpdateUserRequest.branchId,
+        branchName = dUpdateUserRequest.branchName,
+        branchAddress = dUpdateUserRequest.branchAddress,
+        branchCreatedAt = LocalDateTime.now(),
+        branchUpdatedAt = LocalDateTime.now(),
+        branchDeleted = 'N',
+        userId = dUpdateUserRequest.userId,
+        branchBossUserId = dUpdateUserRequest.userId,
+    )
+
+    constructor(aCreateBranchRequest: ACreateBranchRequest) : this(
+        branchId = 0,
+        branchName = aCreateBranchRequest.branchName,
+        branchAddress = aCreateBranchRequest.branchAddress,
+        branchCreatedAt = LocalDateTime.now(),
+        branchUpdatedAt = LocalDateTime.now(),
+        branchDeleted = 'N',
+        userId = aCreateBranchRequest.userId,
+        branchBossUserId = aCreateBranchRequest.userId,
+    )
+
+    constructor(aUpdateBranchRequest: AUpdateBranchRequest) : this(
+        branchId = aUpdateBranchRequest.branchId,
+        branchName = aUpdateBranchRequest.branchName,
+        branchAddress = aUpdateBranchRequest.branchAddress,
+        branchUpdatedAt = LocalDateTime.now(),
+        branchDeleted = aUpdateBranchRequest.branchDeleted,
+        userId = aUpdateBranchRequest.userId,
+        branchBossUserId = aUpdateBranchRequest.userId,
     )
 }

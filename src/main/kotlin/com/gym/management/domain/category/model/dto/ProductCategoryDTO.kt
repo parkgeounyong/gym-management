@@ -21,4 +21,24 @@ data class ProductCategoryDTO(
         productCategoryDeleted = productCategory.procaDeleted,
         userId = productCategory.userId
     )
+
+    constructor(aCreateProductCategoryRequest: ACreateProductCategoryRequest) : this(
+        productCategoryCode = aCreateProductCategoryRequest.productCategoryCode,
+        branchId = aCreateProductCategoryRequest.branchId,
+        productCategoryName = aCreateProductCategoryRequest.productCategoryName,
+        productCategoryCreatedAt = LocalDateTime.now(),
+        productCategoryUpdatedAt = LocalDateTime.now(),
+        productCategoryDeleted = 'N',
+        userId = aCreateProductCategoryRequest.userId,
+    )
+
+    constructor(aUpdateProductCategoryRequest: AUpdateProductCategoryRequest) : this(
+        productCategoryCode = aUpdateProductCategoryRequest.productCategoryCode,
+        branchId = aUpdateProductCategoryRequest.branchId,
+        productCategoryName = aUpdateProductCategoryRequest.productCategoryName,
+        productCategoryCreatedAt = LocalDateTime.now(),
+        productCategoryUpdatedAt = LocalDateTime.now(),
+        productCategoryDeleted = aUpdateProductCategoryRequest.productCategoryDeleted,
+        userId = aUpdateProductCategoryRequest.userId,
+    )
 }

@@ -34,7 +34,7 @@ class ProductTemplate(
     @Size(max = 20)
     @NotNull
     @Column(name = "prote_name", nullable = false, length = 20)
-    val proteName: String,
+    var proteName: String,
 
     @NotNull
     @Column(name = "prote_price", nullable = false)
@@ -48,12 +48,12 @@ class ProductTemplate(
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "prote_updated_at", nullable = false)
-    val proteUpdatedAt: LocalDateTime = LocalDateTime.now(),
+    var proteUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
     @ColumnDefault("'N'")
     @Column(name = "prote_deleted", nullable = false, length = Integer.MAX_VALUE)
-    val proteDeleted: Char = 'N',
+    var proteDeleted: Char = 'N',
 ) {
     constructor(
         productTemplateDTO: ProductTemplateDTO
@@ -67,4 +67,12 @@ class ProductTemplate(
         proteUpdatedAt = LocalDateTime.now(),
         proteDeleted = 'N'
     )
+
+    fun updateBy(productTemplateDTO: ProductTemplateDTO): ProductTemplate {
+        proteName = productTemplateDTO.proteName
+        protePrice = productTemplateDTO.protePrice
+        proteUpdatedAt = LocalDateTime.now()
+        proteDeleted = productTemplateDTO.proteDeleted
+        return this
+    }
 }

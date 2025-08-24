@@ -67,16 +67,17 @@ class Product(
         productPrice = productDTO.productPrice,
         productCreatedAt = LocalDateTime.now(),
         productUpdatedAt = LocalDateTime.now(),
-        productDeleted = productDTO.productDeleted,
+        productDeleted = 'N',
         userId = productDTO.userId
     )
 
-    fun updateBy(productDTO: ProductDTO) {
+    fun updateBy(productDTO: ProductDTO): Product {
         procaCode = productDTO.productCategoryCode
         productName = productDTO.productName
         productPrice = productDTO.productPrice
         productUpdatedAt = LocalDateTime.now()
         productDeleted = productDTO.productDeleted
         userId = productDTO.userId
+        return this
     }
 }

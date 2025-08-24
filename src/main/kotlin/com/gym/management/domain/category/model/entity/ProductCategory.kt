@@ -49,7 +49,7 @@ class ProductCategory(
     @Column(name = "user_id", nullable = false)
     var userId: String,
 ) {
-    constructor(productCategoryDTO: ProductCategoryDTO): this(
+    constructor(productCategoryDTO: ProductCategoryDTO) : this(
         procaCode = productCategoryDTO.productCategoryCode,
         branchId = productCategoryDTO.branchId,
         procaName = productCategoryDTO.productCategoryName,
@@ -59,10 +59,11 @@ class ProductCategory(
         userId = productCategoryDTO.userId
     )
 
-    fun updateBy(productCategoryDTO: ProductCategoryDTO) {
+    fun updateBy(productCategoryDTO: ProductCategoryDTO): ProductCategory {
         procaName = productCategoryDTO.productCategoryName
         procaUpdatedAt = LocalDateTime.now()
         procaDeleted = productCategoryDTO.productCategoryDeleted
         userId = productCategoryDTO.userId
+        return this
     }
 }

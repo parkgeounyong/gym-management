@@ -27,21 +27,21 @@ class Template(
     @Size(max = 100)
     @NotNull
     @Column(name = "template_name", nullable = false, length = 100)
-    val templateName: String,
+    var templateName: String,
 
     @NotNull
     @Column(name = "template_priority", nullable = false)
-    val templatePriority: Int,
+    var templatePriority: Int,
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "template_start_at", nullable = false)
-    val templateStartAt: LocalDateTime = LocalDateTime.now(),
+    var templateStartAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
     @ColumnDefault("(CURRENT_TIMESTAMP + '100 years')")
     @Column(name = "template_end_at", nullable = false)
-    val templateEndAt: LocalDateTime = LocalDateTime.now().withYear(100),
+    var templateEndAt: LocalDateTime = LocalDateTime.now().withYear(100),
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
@@ -51,12 +51,12 @@ class Template(
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "template_updated_at", nullable = false)
-    val templateUpdatedAt: LocalDateTime = LocalDateTime.now(),
+    var templateUpdatedAt: LocalDateTime = LocalDateTime.now(),
 
     @NotNull
     @ColumnDefault("'N'")
     @Column(name = "template_deleted", nullable = false, length = Integer.MAX_VALUE)
-    val templateDeleted: Char = 'N',
+    var templateDeleted: Char = 'N',
 ) {
     constructor(templateDTO: TemplateDTO) : this(
         branchId = templateDTO.branchId,
@@ -69,4 +69,14 @@ class Template(
         templateUpdatedAt = LocalDateTime.now(),
         templateDeleted = 'N',
     )
+
+    fun updateBy(templateDTO: TemplateDTO): Template {
+        templateName = templateDTO.templateName
+        templatePriority = templateDTO.templatePriority
+        templateStartAt = templateDTO.templateStartAt
+        templateEndAt = templateDTO.templateEndAt
+        templateUpdatedAt = LocalDateTime.now()
+        templateDeleted = templateDTO.templateDeleted
+        return this
+    }
 }
