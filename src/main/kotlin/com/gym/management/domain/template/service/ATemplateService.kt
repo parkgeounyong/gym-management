@@ -33,4 +33,9 @@ class ATemplateService(
             endAt
         ).map { TemplateDTO(it) }
     }
+
+    fun findBy(branchId: Int, templateCode: String): TemplateDTO {
+        return TemplateDTO(
+            templateRepository.findById(TemplateId(branchId, templateCode)).orElseThrow { TemplateNotFoundException() })
+    }
 }

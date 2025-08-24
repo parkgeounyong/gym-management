@@ -40,4 +40,14 @@ class ATemplateController(
             data = aTemplateService.findBy(branchId, startAt, endAt)
         )
     }
+
+    @GetMapping("/admin/templates/{branchId}/{templateCode}")
+    fun findBy(
+        @PathVariable branchId: Int,
+        @PathVariable templateCode: String,
+    ): ApiResponse<TemplateDTO> {
+        return ApiResponse(
+            data = aTemplateService.findBy(branchId, templateCode)
+        )
+    }
 }
