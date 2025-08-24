@@ -1,5 +1,6 @@
 package com.gym.management.domain.category.service
 
+import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.category.ProductCategoryNotFoundException
 import com.gym.management.domain.category.model.dto.ACreateProductCategoryRequest
 import com.gym.management.domain.category.model.dto.AUpdateProductCategoryRequest
@@ -25,5 +26,29 @@ class ACategoryService(
             .orElseThrow { ProductCategoryNotFoundException() }
             .updateBy(productCategoryDTO)
         return ProductCategoryDTO(result)
+    }
+
+    fun fetchProductCategory(
+        branchId: Int? = null,
+        page: Int,
+        size: Int,
+        sortBy: String,
+        direction: String
+    ): PageResponse<ProductCategoryDTO> {
+        val count = productCategoryRepository.countProductCategory(branchId)
+        val items = productCategoryRepository.fetchProductCategory(branchId, page, size, sortBy, direction)
+        return PageResponse(
+            totalCount = count,
+            totalPages = (count + size - 1) / size,
+            page = page,
+            size = size,
+            sortBy = sortBy,
+            direction = direction,
+            items = items
+        )
+    }
+
+    fun findBy(procaCode: String, branchId: Int): ProductCategoryDTO {
+        return ProductCategoryDTO(productCategoryRepository.findById(ProductCategoryId(procaCode, branchId)).orElseThrow { ProductCategoryNotFoundException() })
     }
 }

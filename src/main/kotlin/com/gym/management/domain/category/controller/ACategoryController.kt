@@ -1,15 +1,13 @@
 package com.gym.management.domain.category.controller
 
 import com.gym.management.common.model.ApiResponse
+import com.gym.management.common.model.PageResponse
 import com.gym.management.domain.category.model.dto.ACreateProductCategoryRequest
 import com.gym.management.domain.category.model.dto.AUpdateProductCategoryRequest
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.service.ACategoryService
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @Tag(name = "Category")
@@ -32,5 +30,24 @@ class ACategoryController(
         return ApiResponse(
             data = aCategoryService.updateProductCategory(aUpdateProductCategoryRequest)
         )
+    }
+
+    @GetMapping("/admin/categories")
+    fun fetchBranches(
+        @RequestParam branchId: Int? = null,
+        @RequestParam page: Int,
+        @RequestParam size: Int,
+        @RequestParam sortBy: String,
+        @RequestParam direction: String
+    ): ApiResponse<PageResponse<ProductCategoryDTO>> {
+        return ApiResponse(data = aCategoryService.fetchProductCategory(branchId, page, size, sortBy, direction))
+    }
+
+    @GetMapping("/admin/categories/{branchId}")
+    fun findBy(
+        @PathVariable branchId: Int,
+        @RequestParam procaCode: String
+    ): ApiResponse<ProductCategoryDTO> {
+        return ApiResponse(data = aCategoryService.findBy(procaCode, branchId))
     }
 }

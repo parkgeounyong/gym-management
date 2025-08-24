@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProductCategoryRepository : JpaRepository<ProductCategory, ProductCategoryId> {
+interface ProductCategoryRepository : JpaRepository<ProductCategory, ProductCategoryId>, ProductCategoryRepositoryCustom {
     fun findByBranchId(branchId: Int): MutableList<ProductCategory>
 }
