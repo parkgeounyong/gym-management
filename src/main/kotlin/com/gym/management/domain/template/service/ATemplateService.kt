@@ -7,6 +7,7 @@ import com.gym.management.domain.template.model.entity.id.TemplateId
 import com.gym.management.domain.template.repository.TemplateRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 
 @Service
 class ATemplateService(
@@ -23,5 +24,13 @@ class ATemplateService(
             .orElseThrow { TemplateNotFoundException() }
             .updateBy(templateDTO)
         return TemplateDTO(result)
+    }
+
+    fun findBy(branchId: Int, startAt: LocalDateTime, endAt: LocalDateTime): List<TemplateDTO> {
+        return templateRepository.findByBranchIdAndTemplateEndAtGreaterThanEqualAndTemplateStartAtLessThanEqual(
+            branchId,
+            startAt,
+            endAt
+        ).map { TemplateDTO(it) }
     }
 }

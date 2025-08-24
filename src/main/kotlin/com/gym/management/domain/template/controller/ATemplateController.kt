@@ -4,10 +4,8 @@ import com.gym.management.common.model.ApiResponse
 import com.gym.management.domain.template.model.dto.TemplateDTO
 import com.gym.management.domain.template.service.ATemplateService
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.time.LocalDateTime
 
 @RestController
 @Tag(name = "template")
@@ -29,6 +27,17 @@ class ATemplateController(
     ): ApiResponse<TemplateDTO> {
         return ApiResponse(
             data = aTemplateService.updateTemplates(templateDTO)
+        )
+    }
+
+    @GetMapping("/admin/templates")
+    fun findBy(
+        @RequestParam branchId: Int,
+        @RequestParam startAt: LocalDateTime = LocalDateTime.now(),
+        @RequestParam endAt: LocalDateTime = LocalDateTime.now().plusWeeks(1),
+    ): ApiResponse<List<TemplateDTO>> {
+        return ApiResponse(
+            data = aTemplateService.findBy(branchId, startAt, endAt)
         )
     }
 }
