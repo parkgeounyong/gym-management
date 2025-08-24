@@ -1,5 +1,6 @@
 package com.gym.management.domain.product.repository
 
+import com.gym.management.common.utils.QuerydslUtils
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.entity.QProduct
 import com.gym.management.domain.product.model.entity.QProductTemplate
@@ -55,5 +56,33 @@ class ProductRepositoryImpl(
                     userId = tuple.get(product.userId)!!,
                 )
             }
+    }
+
+    override fun countProduct(branchId: Int?): Int {
+        val product = QProduct.product
+        return queryFactory
+            .select(product.count())
+            .from(product)
+            .where(QuerydslUtils.buildEqualsIfPresent(product.branchId, branchId))
+            .fetchOne()?.toInt() ?: 0
+    }
+
+    override fun fetchProduct(
+        branchId: Int?,
+        page: Int,
+        size: Int,
+        sortBy: String,
+        direction: String
+    ): List<ProductDTO> {
+        val product = QProduct.product
+
+        return queryFactory.select(product)
+            .from(product)
+            .where(QuerydslUtils.buildEqualsIfPresent(product.branchId, branchId))
+            .orderBy(QuerydslUtils.createSort(product, sortBy, direction))
+            .offset((page - 1) * size.toLong())
+            .limit(size.toLong())
+            .fetch()
+            .map { ProductDTO(it) }
     }
 }

@@ -1,5 +1,6 @@
 package com.gym.management.domain.product.service
 
+import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.product.ProductNotFoundException
 import com.gym.management.config.exception.custom.product.ProductTemplateNotFoundException
 import com.gym.management.domain.product.model.dto.ProductDTO
@@ -44,5 +45,30 @@ class AProductService(
             .orElseThrow { ProductNotFoundException() }
             .updateBy(productDTO)
         return ProductDTO(result)
+    }
+
+    fun fetchProduct(
+        branchId: Int? = null,
+        page: Int,
+        size: Int,
+        sortBy: String,
+        direction: String
+    ): PageResponse<ProductDTO> {
+        val count = productRepository.countProduct(branchId)
+        val items = productRepository.fetchProduct(branchId, page, size, sortBy, direction)
+        return PageResponse(
+            totalCount = count,
+            totalPages = (count + size - 1) / size,
+            page = page,
+            size = size,
+            sortBy = sortBy,
+            direction = direction,
+            items = items
+        )
+    }
+
+    fun findBy(branchId: Int, productCode: String): ProductDTO {
+        return ProductDTO(productRepository.findById(ProductId(branchId, productCode))
+            .orElseThrow { ProductNotFoundException() })
     }
 }
