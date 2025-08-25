@@ -17,7 +17,7 @@ class JwtUtilsTests : BehaviorSpec({
         }
     }
 
-    given("buildClaims(authorizationHeader: String)") {
+    given("buildClaims(authorizationHeader: String) 테스트") {
         `when`("userId=abc123 으로 토큰을 생성하면") {
             val token = JwtUtils.generateToken("abc123")
             then("토큰을 파싱하면 userId=abc123 이 Claims에 있어야 한다") {
