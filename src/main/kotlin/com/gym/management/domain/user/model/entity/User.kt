@@ -1,6 +1,5 @@
 package com.gym.management.domain.user.model.entity
 
-import com.gym.management.domain.user.model.dto.UserDTO
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
@@ -55,24 +54,4 @@ class User(
     @Column(name = "user_deleted", nullable = false)
     @Comment("삭제 여부, 'Y'는 삭제됨, 'N'은 사용 중")
     val userDeleted: Char = 'N',
-) {
-    constructor(userDTO: UserDTO) : this(
-        userId = userDTO.userId,
-        userPassword = userDTO.userPassword,
-        userRole = userDTO.userRole,
-        userName = userDTO.userName,
-        userPhone = userDTO.userPhone,
-        userEmail = userDTO.userEmail,
-        userCreatedAt = LocalDateTime.now(),
-        userUpdatedAt = LocalDateTime.now(),
-        userDeleted = userDTO.userDeleted,
-    )
-
-    fun updateBy(userDTO: UserDTO): User {
-        userName = userDTO.userName
-        userPhone = userDTO.userPhone
-        userEmail = userDTO.userEmail
-        userUpdatedAt = userDTO.userUpdatedAt
-        return this
-    }
-}
+)
