@@ -5,6 +5,9 @@ import com.gym.management.common.model.PageResponse
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.dto.ProductTemplateDTO
 import com.gym.management.domain.product.model.request.CreateProductRequest
+import com.gym.management.domain.product.model.request.CreateProductTemplateRequest
+import com.gym.management.domain.product.model.request.UpdateProductRequest
+import com.gym.management.domain.product.model.request.UpdateProductTemplateRequest
 import com.gym.management.domain.product.service.AProductService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
@@ -16,19 +19,19 @@ class AProductController(
 ) {
     @PostMapping("/admin/product-templates")
     fun createProductTemplates(
-        @RequestBody productTemplateDTO: ProductTemplateDTO
+        @RequestBody createProductTemplateRequest: CreateProductTemplateRequest
     ): ApiResponse<ProductTemplateDTO> {
         return ApiResponse(
-            data = aProductService.createProductTemplates(productTemplateDTO)
+            data = aProductService.createProductTemplates(createProductTemplateRequest)
         )
     }
 
     @PutMapping("/admin/product-templates")
     fun updateProductTemplates(
-        @RequestBody productTemplateDTO: ProductTemplateDTO
+        @RequestBody updateProductTemplateRequest: UpdateProductTemplateRequest
     ): ApiResponse<ProductTemplateDTO> {
         return ApiResponse(
-            data = aProductService.updateProductTemplates(productTemplateDTO)
+            data = aProductService.updateProductTemplates(updateProductTemplateRequest)
         )
     }
 
@@ -64,10 +67,10 @@ class AProductController(
 
     @PutMapping("/admin/products")
     fun updateProduct(
-        @RequestBody productDTO: ProductDTO
+        @RequestBody updateProductRequest: UpdateProductRequest
     ): ApiResponse<ProductDTO> {
         return ApiResponse(
-            data = aProductService.updateProduct(productDTO)
+            data = aProductService.updateProduct(updateProductRequest)
         )
     }
 

@@ -7,12 +7,18 @@ import com.gym.management.domain.product.model.ProductDTOMapper.toDto
 import com.gym.management.domain.product.model.ProductMapper.toDto
 import com.gym.management.domain.product.model.ProductMapper.toEntity
 import com.gym.management.domain.product.model.ProductMapper.update
+import com.gym.management.domain.product.model.ProductTemplateDTOMapper.toDto
+import com.gym.management.domain.product.model.ProductTemplateMapper.toDto
+import com.gym.management.domain.product.model.ProductTemplateMapper.toEntity
+import com.gym.management.domain.product.model.ProductTemplateMapper.update
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.dto.ProductTemplateDTO
-import com.gym.management.domain.product.model.entity.ProductTemplate
 import com.gym.management.domain.product.model.entity.id.ProductId
 import com.gym.management.domain.product.model.entity.id.ProductTemplateId
 import com.gym.management.domain.product.model.request.CreateProductRequest
+import com.gym.management.domain.product.model.request.CreateProductTemplateRequest
+import com.gym.management.domain.product.model.request.UpdateProductRequest
+import com.gym.management.domain.product.model.request.UpdateProductTemplateRequest
 import com.gym.management.domain.product.repository.ProductRepository
 import com.gym.management.domain.product.repository.ProductTemplateRepository
 import org.springframework.stereotype.Service
@@ -23,25 +29,24 @@ class AProductService(
     private val productTemplateRepository: ProductTemplateRepository,
     private val productRepository: ProductRepository,
 ) {
-    fun createProductTemplates(productTemplateDTO: ProductTemplateDTO): ProductTemplateDTO {
-        productRepository.findById(ProductId(productTemplateDTO.branchId, productTemplateDTO.productCode))
+    fun createProductTemplates(createProductTemplateRequest: CreateProductTemplateRequest): ProductTemplateDTO {
+        productRepository.findById(ProductId(createProductTemplateRequest.branchId, createProductTemplateRequest.productCode))
             .orElseThrow { ProductNotFoundException() }
-        val result = productTemplateRepository.save(ProductTemplate(productTemplateDTO))
-        return ProductTemplateDTO(result)
+        return productTemplateRepository.save(createProductTemplateRequest.toDto().toEntity())
+            .toDto()
     }
 
     @Transactional
-    fun updateProductTemplates(productTemplateDTO: ProductTemplateDTO): ProductTemplateDTO {
-        val result = productTemplateRepository.findById(
+    fun updateProductTemplates(updateProductTemplateRequest: UpdateProductTemplateRequest): ProductTemplateDTO {
+        return productTemplateRepository.findById(
             ProductTemplateId(
-                productTemplateDTO.branchId,
-                productTemplateDTO.templateCode,
-                productTemplateDTO.productCode
+                updateProductTemplateRequest.branchId,
+                updateProductTemplateRequest.templateCode,
+                updateProductTemplateRequest.productCode
             )
-        )
-            .orElseThrow { ProductTemplateNotFoundException() }
-            .updateBy(productTemplateDTO)
-        return ProductTemplateDTO(result)
+        ).orElseThrow { ProductTemplateNotFoundException() }
+            .update(updateProductTemplateRequest.toDto())
+            .toDto()
     }
 
     fun fetchProductTemplate(
@@ -67,9 +72,8 @@ class AProductService(
     }
 
     fun findBy(branchId: Int, templateCode: String, productCode: String): ProductTemplateDTO {
-        return ProductTemplateDTO(
-            productTemplateRepository.findById(ProductTemplateId(branchId, templateCode, productCode))
-                .orElseThrow { ProductTemplateNotFoundException() })
+        return productTemplateRepository.findById(ProductTemplateId(branchId, templateCode, productCode))
+            .orElseThrow { ProductTemplateNotFoundException() }.toDto()
     }
 
     fun createProduct(createProductRequest: CreateProductRequest): ProductDTO {
@@ -77,10 +81,10 @@ class AProductService(
     }
 
     @Transactional
-    fun updateProduct(productDTO: ProductDTO): ProductDTO {
-        return productRepository.findById(ProductId(productDTO.branchId, productDTO.productCode))
+    fun updateProduct(updateProductRequest: UpdateProductRequest): ProductDTO {
+        return productRepository.findById(ProductId(updateProductRequest.branchId, updateProductRequest.productCode))
             .orElseThrow { ProductNotFoundException() }
-            .update(productDTO)
+            .update(updateProductRequest.toDto())
             .toDto()
     }
 
