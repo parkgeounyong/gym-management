@@ -2,8 +2,8 @@ package com.gym.management.domain.category.service
 
 import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.category.ProductCategoryNotFoundException
-import com.gym.management.domain.category.model.dto.ACreateProductCategoryRequest
-import com.gym.management.domain.category.model.dto.AUpdateProductCategoryRequest
+import com.gym.management.domain.category.model.request.ACreateProductCategoryRequest
+import com.gym.management.domain.category.model.request.AUpdateProductCategoryRequest
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.model.entity.ProductCategory
 import com.gym.management.domain.category.model.entity.id.ProductCategoryId

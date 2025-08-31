@@ -1,6 +1,8 @@
 package com.gym.management.domain.category.model.dto
 
 import com.gym.management.domain.category.model.entity.ProductCategory
+import com.gym.management.domain.category.model.request.ACreateProductCategoryRequest
+import com.gym.management.domain.category.model.request.AUpdateProductCategoryRequest
 import java.time.LocalDateTime
 
 data class ProductCategoryDTO(

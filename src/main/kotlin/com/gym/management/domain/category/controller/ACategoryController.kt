@@ -2,8 +2,8 @@ package com.gym.management.domain.category.controller
 
 import com.gym.management.common.model.ApiResponse
 import com.gym.management.common.model.PageResponse
-import com.gym.management.domain.category.model.dto.ACreateProductCategoryRequest
-import com.gym.management.domain.category.model.dto.AUpdateProductCategoryRequest
+import com.gym.management.domain.category.model.request.ACreateProductCategoryRequest
+import com.gym.management.domain.category.model.request.AUpdateProductCategoryRequest
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.service.ACategoryService
 import io.swagger.v3.oas.annotations.tags.Tag
