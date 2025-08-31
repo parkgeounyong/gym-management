@@ -4,6 +4,7 @@ import com.gym.management.common.model.ApiResponse
 import com.gym.management.common.model.PageResponse
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.dto.ProductTemplateDTO
+import com.gym.management.domain.product.model.request.CreateProductRequest
 import com.gym.management.domain.product.service.AProductService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
@@ -54,10 +55,10 @@ class AProductController(
 
     @PostMapping("/admin/products")
     fun createProduct(
-        @RequestBody productDTO: ProductDTO
+        @RequestBody createProductRequest: CreateProductRequest
     ): ApiResponse<ProductDTO> {
         return ApiResponse(
-            data = aProductService.createProduct(productDTO)
+            data = aProductService.createProduct(createProductRequest)
         )
     }
 

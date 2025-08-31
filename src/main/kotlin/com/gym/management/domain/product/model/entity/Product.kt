@@ -1,6 +1,5 @@
 package com.gym.management.domain.product.model.entity
 
-import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.entity.id.ProductId
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
@@ -58,26 +57,4 @@ class Product(
     @NotNull
     @Column(name = "user_id", nullable = false)
     var userId: String
-) {
-    constructor(productDTO: ProductDTO) : this(
-        productCode = productDTO.productCode,
-        branchId = productDTO.branchId,
-        procaCode = productDTO.productCategoryCode,
-        productName = productDTO.productName,
-        productPrice = productDTO.productPrice,
-        productCreatedAt = LocalDateTime.now(),
-        productUpdatedAt = LocalDateTime.now(),
-        productDeleted = 'N',
-        userId = productDTO.userId
-    )
-
-    fun updateBy(productDTO: ProductDTO): Product {
-        procaCode = productDTO.productCategoryCode
-        productName = productDTO.productName
-        productPrice = productDTO.productPrice
-        productUpdatedAt = LocalDateTime.now()
-        productDeleted = productDTO.productDeleted
-        userId = productDTO.userId
-        return this
-    }
-}
+)

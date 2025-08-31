@@ -1,5 +1,8 @@
 package com.gym.management.domain.product.service
 
+import com.gym.management.domain.product.model.ProductMapper.toDto
+import com.gym.management.domain.product.model.ProductMapper.toEntity
+import com.gym.management.domain.product.model.ProductMapper.update
 import com.gym.management.domain.product.repository.ProductRepository
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.entity.Product
@@ -15,8 +18,8 @@ class DProductService(
     private val entityManager: EntityManager,
 ) {
     fun createProduct(productDTO: ProductDTO): ProductDTO {
-        val result = productRepository.save(Product(productDTO))
-        return ProductDTO(result)
+        return productRepository.save(productDTO.toEntity())
+            .toDto()
     }
 
     @Transactional
@@ -31,9 +34,9 @@ class DProductService(
             val key = ProductId(dto.branchId, dto.productCode)
             val entity = existingEntities[key]
             if (entity != null) {
-                entity.updateBy(dto)
+                entity.update(dto)
             } else {
-                toInsert.add(Product(dto))
+                toInsert.add(dto.toEntity())
             }
         }
 

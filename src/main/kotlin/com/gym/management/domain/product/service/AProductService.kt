@@ -3,12 +3,16 @@ package com.gym.management.domain.product.service
 import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.product.ProductNotFoundException
 import com.gym.management.config.exception.custom.product.ProductTemplateNotFoundException
+import com.gym.management.domain.product.model.ProductDTOMapper.toDto
+import com.gym.management.domain.product.model.ProductMapper.toDto
+import com.gym.management.domain.product.model.ProductMapper.toEntity
+import com.gym.management.domain.product.model.ProductMapper.update
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.dto.ProductTemplateDTO
-import com.gym.management.domain.product.model.entity.Product
 import com.gym.management.domain.product.model.entity.ProductTemplate
 import com.gym.management.domain.product.model.entity.id.ProductId
 import com.gym.management.domain.product.model.entity.id.ProductTemplateId
+import com.gym.management.domain.product.model.request.CreateProductRequest
 import com.gym.management.domain.product.repository.ProductRepository
 import com.gym.management.domain.product.repository.ProductTemplateRepository
 import org.springframework.stereotype.Service
@@ -28,7 +32,13 @@ class AProductService(
 
     @Transactional
     fun updateProductTemplates(productTemplateDTO: ProductTemplateDTO): ProductTemplateDTO {
-        val result = productTemplateRepository.findById(ProductTemplateId(productTemplateDTO.branchId, productTemplateDTO.templateCode, productTemplateDTO.productCode))
+        val result = productTemplateRepository.findById(
+            ProductTemplateId(
+                productTemplateDTO.branchId,
+                productTemplateDTO.templateCode,
+                productTemplateDTO.productCode
+            )
+        )
             .orElseThrow { ProductTemplateNotFoundException() }
             .updateBy(productTemplateDTO)
         return ProductTemplateDTO(result)
@@ -62,17 +72,16 @@ class AProductService(
                 .orElseThrow { ProductTemplateNotFoundException() })
     }
 
-    fun createProduct(productDTO: ProductDTO): ProductDTO {
-        val result = productRepository.save(Product(productDTO))
-        return ProductDTO(result)
+    fun createProduct(createProductRequest: CreateProductRequest): ProductDTO {
+        return productRepository.save(createProductRequest.toDto().toEntity()).toDto()
     }
 
     @Transactional
     fun updateProduct(productDTO: ProductDTO): ProductDTO {
-        val result = productRepository.findById(ProductId(productDTO.branchId, productDTO.productCode))
+        return productRepository.findById(ProductId(productDTO.branchId, productDTO.productCode))
             .orElseThrow { ProductNotFoundException() }
-            .updateBy(productDTO)
-        return ProductDTO(result)
+            .update(productDTO)
+            .toDto()
     }
 
     fun fetchProduct(
@@ -96,7 +105,8 @@ class AProductService(
     }
 
     fun findBy(branchId: Int, productCode: String): ProductDTO {
-        return ProductDTO(productRepository.findById(ProductId(branchId, productCode))
-            .orElseThrow { ProductNotFoundException() })
+        return productRepository.findById(ProductId(branchId, productCode))
+            .orElseThrow { ProductNotFoundException() }
+            .toDto()
     }
 }
