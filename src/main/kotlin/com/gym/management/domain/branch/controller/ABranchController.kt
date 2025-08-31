@@ -2,8 +2,8 @@ package com.gym.management.domain.branch.controller
 
 import com.gym.management.common.model.ApiResponse
 import com.gym.management.common.model.PageResponse
-import com.gym.management.domain.branch.model.dto.ACreateBranchRequest
-import com.gym.management.domain.branch.model.dto.AUpdateBranchRequest
+import com.gym.management.domain.branch.model.request.ACreateBranchRequest
+import com.gym.management.domain.branch.model.request.AUpdateBranchRequest
 import com.gym.management.domain.branch.model.dto.BranchDTO
 import com.gym.management.domain.branch.service.ABranchService
 import org.springframework.web.bind.annotation.*
