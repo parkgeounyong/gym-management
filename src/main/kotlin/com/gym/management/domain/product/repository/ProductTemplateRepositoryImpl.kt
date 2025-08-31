@@ -1,6 +1,7 @@
 package com.gym.management.domain.product.repository
 
 import com.gym.management.common.utils.QuerydslUtils
+import com.gym.management.domain.product.model.ProductTemplateMapper.toDto
 import com.gym.management.domain.product.model.dto.ProductTemplateDTO
 import com.gym.management.domain.product.model.entity.QProductTemplate
 import com.querydsl.jpa.impl.JPAQueryFactory
@@ -41,6 +42,6 @@ class ProductTemplateRepositoryImpl(
             .offset((page - 1) * size.toLong())
             .limit(size.toLong())
             .fetch()
-            .map { ProductTemplateDTO(it) }
+            .map { it.toDto() }
     }
 }
