@@ -2,6 +2,8 @@ package com.gym.management.domain.template.controller
 
 import com.gym.management.common.model.ApiResponse
 import com.gym.management.domain.template.model.dto.TemplateDTO
+import com.gym.management.domain.template.model.request.ATemplateCreateRequest
+import com.gym.management.domain.template.model.request.ATemplateUpdateRequest
 import com.gym.management.domain.template.service.ATemplateService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
@@ -14,19 +16,19 @@ class ATemplateController(
 ) {
     @PostMapping("/admin/templates")
     fun createTemplates(
-        @RequestBody templateDTO: TemplateDTO
+        @RequestBody aTemplateCreateRequest: ATemplateCreateRequest
     ): ApiResponse<TemplateDTO> {
         return ApiResponse(
-            data = aTemplateService.createTemplates(templateDTO)
+            data = aTemplateService.createTemplates(aTemplateCreateRequest)
         )
     }
 
     @PutMapping("/admin/templates")
     fun updateTemplates(
-        @RequestBody templateDTO: TemplateDTO
+        @RequestBody aTemplateUpdateRequest: ATemplateUpdateRequest
     ): ApiResponse<TemplateDTO> {
         return ApiResponse(
-            data = aTemplateService.updateTemplates(templateDTO)
+            data = aTemplateService.updateTemplates(aTemplateUpdateRequest)
         )
     }
 

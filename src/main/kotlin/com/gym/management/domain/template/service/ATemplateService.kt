@@ -1,9 +1,14 @@
 package com.gym.management.domain.template.service
 
 import com.gym.management.config.exception.custom.template.TemplateNotFoundException
+import com.gym.management.domain.template.model.TemplateDTOMapper.toDTO
+import com.gym.management.domain.template.model.TemplateMapper.toDto
+import com.gym.management.domain.template.model.TemplateMapper.toEntity
+import com.gym.management.domain.template.model.TemplateMapper.update
 import com.gym.management.domain.template.model.dto.TemplateDTO
-import com.gym.management.domain.template.model.entity.Template
 import com.gym.management.domain.template.model.entity.id.TemplateId
+import com.gym.management.domain.template.model.request.ATemplateCreateRequest
+import com.gym.management.domain.template.model.request.ATemplateUpdateRequest
 import com.gym.management.domain.template.repository.TemplateRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -13,17 +18,22 @@ import java.time.LocalDateTime
 class ATemplateService(
     private val templateRepository: TemplateRepository,
 ) {
-    fun createTemplates(templateDTO: TemplateDTO): TemplateDTO {
-        val result = templateRepository.save(Template(templateDTO))
-        return TemplateDTO(result)
+    fun createTemplates(aTemplateCreateRequest: ATemplateCreateRequest): TemplateDTO {
+        return templateRepository.save(aTemplateCreateRequest.toDTO().toEntity())
+            .toDto()
     }
 
     @Transactional
-    fun updateTemplates(templateDTO: TemplateDTO): TemplateDTO {
-        val result = templateRepository.findById(TemplateId(templateDTO.branchId, templateDTO.templateCode))
+    fun updateTemplates(aTemplateUpdateRequest: ATemplateUpdateRequest): TemplateDTO {
+        return templateRepository.findById(
+            TemplateId(
+                aTemplateUpdateRequest.branchId,
+                aTemplateUpdateRequest.templateCode
+            )
+        )
             .orElseThrow { TemplateNotFoundException() }
-            .updateBy(templateDTO)
-        return TemplateDTO(result)
+            .update(aTemplateUpdateRequest.toDTO())
+            .toDto()
     }
 
     fun findBy(branchId: Int, startAt: LocalDateTime, endAt: LocalDateTime): List<TemplateDTO> {
@@ -31,11 +41,11 @@ class ATemplateService(
             branchId,
             startAt,
             endAt
-        ).map { TemplateDTO(it) }
+        ).map { it.toDto() }
     }
 
     fun findBy(branchId: Int, templateCode: String): TemplateDTO {
-        return TemplateDTO(
-            templateRepository.findById(TemplateId(branchId, templateCode)).orElseThrow { TemplateNotFoundException() })
+        return templateRepository.findById(TemplateId(branchId, templateCode))
+            .orElseThrow { TemplateNotFoundException() }.toDto()
     }
 }
