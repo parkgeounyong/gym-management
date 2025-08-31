@@ -2,6 +2,8 @@ package com.gym.management.domain.branch.service
 
 import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.branch.BranchNotFoundException
+import com.gym.management.domain.branch.model.BranchDTOMapper.toBranchDTO
+import com.gym.management.domain.branch.model.BranchMapper.toDto
 import com.gym.management.domain.branch.model.request.ACreateBranchRequest
 import com.gym.management.domain.branch.model.request.AUpdateBranchRequest
 import com.gym.management.domain.branch.model.dto.BranchDTO
@@ -14,10 +16,10 @@ class ABranchService(
     private val branchRepository: BranchRepository,
 ) {
     fun createBranch(aCreateBranchRequest: ACreateBranchRequest): BranchDTO =
-        branchService.createBranch(BranchDTO(aCreateBranchRequest))
+        branchService.createBranch(aCreateBranchRequest.toBranchDTO())
 
     fun updateBranch(aUpdateBranchRequest: AUpdateBranchRequest): BranchDTO =
-        branchService.updateBranch(BranchDTO(aUpdateBranchRequest))
+        branchService.updateBranch(aUpdateBranchRequest.toBranchDTO())
 
     fun fetchBranches(
         branchId: Int? = null,
@@ -40,6 +42,6 @@ class ABranchService(
     }
 
     fun findBy(branchId: Int): BranchDTO {
-        return BranchDTO(branchRepository.findById(branchId).orElseThrow { BranchNotFoundException() })
+        return branchRepository.findById(branchId).orElseThrow { BranchNotFoundException() }.toDto()
     }
 }

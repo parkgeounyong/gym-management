@@ -1,6 +1,7 @@
 package com.gym.management.domain.branch.repository
 
 import com.gym.management.common.utils.QuerydslUtils
+import com.gym.management.domain.branch.model.BranchMapper.toDto
 import com.gym.management.domain.branch.model.dto.BranchDTO
 import com.gym.management.domain.branch.model.entity.QBranch
 import com.querydsl.jpa.impl.JPAQueryFactory
@@ -35,6 +36,6 @@ class BranchRepositoryImpl(
             .offset((page - 1) * size.toLong())
             .limit(size.toLong())
             .fetch()
-            .map { BranchDTO(it) }
+            .map { it.toDto() }
     }
 }

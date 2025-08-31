@@ -1,6 +1,5 @@
 package com.gym.management.domain.branch.model.entity
 
-import com.gym.management.domain.branch.model.dto.BranchDTO
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
@@ -50,23 +49,4 @@ class Branch(
     @NotNull
     @Column(name = "branch_boss_user_id", nullable = false, length = 20)
     var branchBossUserId: String,
-) {
-    constructor(branchDTO: BranchDTO): this(
-        branchName = branchDTO.branchName,
-        branchAddress = branchDTO.branchAddress,
-        branchCreatedAt = LocalDateTime.now(),
-        branchUpdatedAt = LocalDateTime.now(),
-        branchDeleted = 'N',
-        userId = branchDTO.userId,
-        branchBossUserId = branchDTO.branchBossUserId,
-    )
-
-    fun updateBy(branchDTO: BranchDTO): Branch{
-        branchName = branchDTO.branchName
-        branchAddress = branchDTO.branchAddress
-        branchUpdatedAt = LocalDateTime.now()
-        userId = branchDTO.userId
-        branchBossUserId = branchDTO.branchBossUserId
-        return this
-    }
-}
+)
