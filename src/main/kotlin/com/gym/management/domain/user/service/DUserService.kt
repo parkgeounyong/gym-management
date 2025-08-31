@@ -6,8 +6,8 @@ import com.gym.management.domain.user.model.dto.UserDTO
 import com.gym.management.domain.branch.service.BranchService
 import com.gym.management.config.exception.custom.user.DuplicateIdException
 import com.gym.management.config.exception.custom.user.UserNotFoundException
-import com.gym.management.domain.user.model.dto.DCreateUserRequest
-import com.gym.management.domain.user.model.dto.DUpdateUserRequest
+import com.gym.management.domain.user.model.request.DCreateUserRequest
+import com.gym.management.domain.user.model.request.DUpdateUserRequest
 import com.gym.management.domain.user.model.entity.User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

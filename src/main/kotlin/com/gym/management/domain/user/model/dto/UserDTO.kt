@@ -1,6 +1,8 @@
 package com.gym.management.domain.user.model.dto
 
 import com.gym.management.common.utils.UserUtils
+import com.gym.management.domain.user.model.request.DCreateUserRequest
+import com.gym.management.domain.user.model.request.DUpdateUserRequest
 import java.time.LocalDateTime
 
 data class UserDTO(

@@ -1,8 +1,8 @@
 package com.gym.management.domain.branch.model.dto
 
 import com.gym.management.domain.branch.model.entity.Branch
-import com.gym.management.domain.user.model.dto.DCreateUserRequest
-import com.gym.management.domain.user.model.dto.DUpdateUserRequest
+import com.gym.management.domain.user.model.request.DCreateUserRequest
+import com.gym.management.domain.user.model.request.DUpdateUserRequest
 import java.time.LocalDateTime
 
 data class BranchDTO(

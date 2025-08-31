@@ -1,8 +1,8 @@
 package com.gym.management.domain.user.controller
 
 import com.gym.management.common.model.ApiResponse
-import com.gym.management.domain.user.model.dto.DCreateUserRequest
-import com.gym.management.domain.user.model.dto.DUpdateUserRequest
+import com.gym.management.domain.user.model.request.DCreateUserRequest
+import com.gym.management.domain.user.model.request.DUpdateUserRequest
 import com.gym.management.domain.user.service.DUserService
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
