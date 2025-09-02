@@ -1,5 +1,8 @@
 package com.gym.management.domain.category.service
 
+import com.gym.management.domain.category.model.ProductCategoryMapper.toDto
+import com.gym.management.domain.category.model.ProductCategoryMapper.toEntity
+import com.gym.management.domain.category.model.ProductCategoryMapper.update
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.model.entity.ProductCategory
 import com.gym.management.domain.category.model.entity.id.ProductCategoryId
@@ -26,9 +29,9 @@ class DCategoryService(
             val key = ProductCategoryId(dto.productCategoryCode, dto.branchId)
             val entity = existingEntities[key]
             if (entity != null) {
-                entity.updateBy(dto)
+                entity.update(dto)
             } else {
-                toInsert.add(ProductCategory(dto))
+                toInsert.add(dto.toEntity())
             }
         }
 
@@ -43,7 +46,7 @@ class DCategoryService(
     }
 
     fun findProductCategoryBy(branchId: Int): List<ProductCategoryDTO> {
-        return productCategoryRepository.findByBranchId(branchId).map { ProductCategoryDTO(it) }
+        return productCategoryRepository.findByBranchId(branchId).map { it.toDto() }
     }
 
     companion object : KLogging()

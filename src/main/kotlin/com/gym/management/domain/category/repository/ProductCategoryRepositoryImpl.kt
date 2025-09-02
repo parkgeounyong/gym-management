@@ -1,6 +1,7 @@
 package com.gym.management.domain.category.repository
 
 import com.gym.management.common.utils.QuerydslUtils
+import com.gym.management.domain.category.model.ProductCategoryMapper.toDto
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.model.entity.QProductCategory
 import com.querydsl.jpa.impl.JPAQueryFactory
@@ -35,6 +36,6 @@ class ProductCategoryRepositoryImpl(
             .offset((page - 1) * size.toLong())
             .limit(size.toLong())
             .fetch()
-            .map { ProductCategoryDTO(it) }
+            .map { it.toDto() }
     }
 }

@@ -1,4 +1,4 @@
-package com.gym.management.domain.branch.model.dto
+package com.gym.management.domain.branch.model.request
 
 
 data class ACreateBranchRequest(

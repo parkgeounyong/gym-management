@@ -1,16 +1,13 @@
-package com.gym.management.domain.product.model.dto
+package com.gym.management.domain.product.model.request
 
 import java.math.BigDecimal
-import java.time.LocalDateTime
 
-data class ProductDTO(
+data class UpdateProductRequest(
     val productCode: String,
     val branchId: Int,
     val productCategoryCode: String,
     val productName: String,
     val productPrice: BigDecimal,
-    val productCreatedAt: LocalDateTime = LocalDateTime.now(),
-    val productUpdatedAt: LocalDateTime = LocalDateTime.now(),
     val productDeleted: Char = 'N',
     val userId: String
 )

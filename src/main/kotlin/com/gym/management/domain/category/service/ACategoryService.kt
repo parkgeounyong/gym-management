@@ -2,10 +2,13 @@ package com.gym.management.domain.category.service
 
 import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.category.ProductCategoryNotFoundException
-import com.gym.management.domain.category.model.dto.ACreateProductCategoryRequest
-import com.gym.management.domain.category.model.dto.AUpdateProductCategoryRequest
+import com.gym.management.domain.category.model.ProductCategoryDTOMapper.toProductCategoryDto
+import com.gym.management.domain.category.model.ProductCategoryMapper.toDto
+import com.gym.management.domain.category.model.ProductCategoryMapper.toEntity
+import com.gym.management.domain.category.model.ProductCategoryMapper.update
+import com.gym.management.domain.category.model.request.ACreateProductCategoryRequest
+import com.gym.management.domain.category.model.request.AUpdateProductCategoryRequest
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
-import com.gym.management.domain.category.model.entity.ProductCategory
 import com.gym.management.domain.category.model.entity.id.ProductCategoryId
 import com.gym.management.domain.category.repository.ProductCategoryRepository
 import org.springframework.stereotype.Service
@@ -15,17 +18,21 @@ class ACategoryService(
     private val productCategoryRepository: ProductCategoryRepository
 ) {
     fun createProductCategory(aCreateProductCategoryRequest: ACreateProductCategoryRequest): ProductCategoryDTO {
-        val productCategoryDTO = ProductCategoryDTO(aCreateProductCategoryRequest)
-        val result = productCategoryRepository.save(ProductCategory(productCategoryDTO))
-        return ProductCategoryDTO(result)
+        return productCategoryRepository.save(aCreateProductCategoryRequest.toProductCategoryDto().toEntity())
+            .toDto()
     }
 
     fun updateProductCategory(aUpdateProductCategoryRequest: AUpdateProductCategoryRequest): ProductCategoryDTO {
-        val productCategoryDTO = ProductCategoryDTO(aUpdateProductCategoryRequest)
-        val result =  productCategoryRepository.findById(ProductCategoryId(productCategoryDTO.productCategoryCode, productCategoryDTO.branchId))
+        val productCategoryDTO = aUpdateProductCategoryRequest.toProductCategoryDto()
+        return productCategoryRepository.findById(
+            ProductCategoryId(
+                productCategoryDTO.productCategoryCode,
+                productCategoryDTO.branchId
+            )
+        )
             .orElseThrow { ProductCategoryNotFoundException() }
-            .updateBy(productCategoryDTO)
-        return ProductCategoryDTO(result)
+            .update(productCategoryDTO)
+            .toDto()
     }
 
     fun fetchProductCategory(
@@ -49,6 +56,7 @@ class ACategoryService(
     }
 
     fun findBy(procaCode: String, branchId: Int): ProductCategoryDTO {
-        return ProductCategoryDTO(productCategoryRepository.findById(ProductCategoryId(procaCode, branchId)).orElseThrow { ProductCategoryNotFoundException() })
+        return productCategoryRepository.findById(ProductCategoryId(procaCode, branchId))
+            .orElseThrow { ProductCategoryNotFoundException() }.toDto()
     }
 }

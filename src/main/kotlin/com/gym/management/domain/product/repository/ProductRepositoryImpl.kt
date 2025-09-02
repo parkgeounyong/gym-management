@@ -1,6 +1,7 @@
 package com.gym.management.domain.product.repository
 
 import com.gym.management.common.utils.QuerydslUtils
+import com.gym.management.domain.product.model.ProductMapper.toDto
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.entity.QProduct
 import com.gym.management.domain.product.model.entity.QProductTemplate
@@ -83,6 +84,6 @@ class ProductRepositoryImpl(
             .offset((page - 1) * size.toLong())
             .limit(size.toLong())
             .fetch()
-            .map { ProductDTO(it) }
+            .map { it.toDto() }
     }
 }

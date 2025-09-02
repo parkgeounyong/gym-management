@@ -1,4 +1,4 @@
-package com.gym.management.domain.category.model.dto
+package com.gym.management.domain.category.model.request
 
 data class ACreateProductCategoryRequest(
     val productCategoryCode: String,
