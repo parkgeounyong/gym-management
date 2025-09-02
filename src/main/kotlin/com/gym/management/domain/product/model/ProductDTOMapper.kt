@@ -6,7 +6,7 @@ import com.gym.management.domain.product.model.request.UpdateProductRequest
 import java.time.LocalDateTime
 
 object ProductDTOMapper {
-    fun CreateProductRequest.toDto(): ProductDTO =
+    fun CreateProductRequest.toProductDto(): ProductDTO =
         ProductDTO(
             productCode = this.productCode,
             branchId = this.branchId,
@@ -19,7 +19,7 @@ object ProductDTOMapper {
             userId = this.userId,
         )
 
-    fun UpdateProductRequest.toDto(): ProductDTO =
+    fun UpdateProductRequest.toProductDto(): ProductDTO =
         ProductDTO(
             productCode = this.productCode,
             branchId = this.branchId,

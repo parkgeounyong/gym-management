@@ -8,7 +8,7 @@ import com.gym.management.domain.user.model.request.DUpdateUserRequest
 import java.time.LocalDateTime
 
 object BranchDTOMapper {
-    fun DCreateUserRequest.toBranchDTO(): BranchDTO =
+    fun DCreateUserRequest.toBranchDto(): BranchDTO =
         BranchDTO(
             branchId = 0,
             branchName = this.branchName,
@@ -20,7 +20,7 @@ object BranchDTOMapper {
             branchBossUserId = this.userId,
         )
 
-    fun DUpdateUserRequest.toBranchDTO(): BranchDTO =
+    fun DUpdateUserRequest.toBranchDto(): BranchDTO =
         BranchDTO(
             branchId = this.branchId,
             branchName = this.branchName,
@@ -32,7 +32,7 @@ object BranchDTOMapper {
             branchBossUserId = this.userId,
         )
 
-    fun ACreateBranchRequest.toBranchDTO(): BranchDTO =
+    fun ACreateBranchRequest.toBranchDto(): BranchDTO =
         BranchDTO(
             branchId = 0,
             branchName = this.branchName,
@@ -44,7 +44,7 @@ object BranchDTOMapper {
             branchBossUserId = this.userId,
         )
 
-    fun AUpdateBranchRequest.toBranchDTO(): BranchDTO =
+    fun AUpdateBranchRequest.toBranchDto(): BranchDTO =
         BranchDTO(
             branchId = this.branchId,
             branchName = this.branchName,

@@ -7,7 +7,7 @@ import com.gym.management.domain.user.model.request.DUpdateUserRequest
 import java.time.LocalDateTime
 
 object UserDTOMapper {
-    fun DCreateUserRequest.toUserDTO(): UserDTO =
+    fun DCreateUserRequest.toUserDto(): UserDTO =
         UserDTO(
             userId = this.userId,
             userPassword = UserUtils.hashSHA256(this.userPassword),
@@ -20,7 +20,7 @@ object UserDTOMapper {
             userDeleted = 'N'
         )
 
-    fun DUpdateUserRequest.toUserDTO(): UserDTO =
+    fun DUpdateUserRequest.toUserDto(): UserDTO =
         UserDTO(
             userId = this.userId,
             userPassword = UserUtils.hashSHA256(this.userPassword),

@@ -1,6 +1,6 @@
 package com.gym.management.domain.product.service
 
-import com.gym.management.domain.product.model.ProductDTOMapper.toDto
+import com.gym.management.domain.product.model.ProductDTOMapper.toProductDto
 import com.gym.management.domain.product.model.ProductMapper.toDto
 import com.gym.management.domain.product.model.ProductMapper.toEntity
 import com.gym.management.domain.product.model.ProductMapper.update
@@ -21,7 +21,7 @@ class DProductService(
     private val entityManager: EntityManager,
 ) {
     fun createProduct(createProductRequest: CreateProductRequest): ProductDTO {
-        return productRepository.save(createProductRequest.toDto().toEntity())
+        return productRepository.save(createProductRequest.toProductDto().toEntity())
             .toDto()
     }
 
@@ -33,7 +33,7 @@ class DProductService(
 
         val toInsert = mutableListOf<Product>()
 
-        updateProductRequests.map { it.toDto() }
+        updateProductRequests.map { it.toProductDto() }
             .forEach { dto ->
                 val key = ProductId(dto.branchId, dto.productCode)
                 val entity = existingEntities[key]

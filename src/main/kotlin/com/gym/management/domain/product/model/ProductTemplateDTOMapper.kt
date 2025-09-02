@@ -6,7 +6,7 @@ import com.gym.management.domain.product.model.request.UpdateProductTemplateRequ
 import java.time.LocalDateTime
 
 object ProductTemplateDTOMapper {
-    fun CreateProductTemplateRequest.toDto(): ProductTemplateDTO =
+    fun CreateProductTemplateRequest.toProductTemplateDto(): ProductTemplateDTO =
         ProductTemplateDTO(
             branchId = this.branchId,
             templateCode = this.templateCode,
@@ -18,7 +18,7 @@ object ProductTemplateDTOMapper {
             proteDeleted = 'N'
         )
 
-    fun UpdateProductTemplateRequest.toDto(): ProductTemplateDTO =
+    fun UpdateProductTemplateRequest.toProductTemplateDto(): ProductTemplateDTO =
         ProductTemplateDTO(
             branchId = this.branchId,
             templateCode = this.templateCode,

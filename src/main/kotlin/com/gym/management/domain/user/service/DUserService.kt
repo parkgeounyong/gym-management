@@ -5,9 +5,9 @@ import com.gym.management.domain.user.model.dto.UserDTO
 import com.gym.management.domain.branch.service.BranchService
 import com.gym.management.config.exception.custom.user.DuplicateIdException
 import com.gym.management.config.exception.custom.user.UserNotFoundException
-import com.gym.management.domain.branch.model.BranchDTOMapper.toBranchDTO
-import com.gym.management.domain.user.model.UserDTOMapper.toUserDTO
-import com.gym.management.domain.user.model.UserMapper.toUser
+import com.gym.management.domain.branch.model.BranchDTOMapper.toBranchDto
+import com.gym.management.domain.user.model.UserDTOMapper.toUserDto
+import com.gym.management.domain.user.model.UserMapper.toEntity
 import com.gym.management.domain.user.model.UserMapper.update
 import com.gym.management.domain.user.model.request.DCreateUserRequest
 import com.gym.management.domain.user.model.request.DUpdateUserRequest
@@ -20,20 +20,20 @@ class DUserService(
     private val branchService: BranchService,
 ) {
     fun createUser(dCreateUserRequest: DCreateUserRequest): Boolean {
-        val userDTO = dCreateUserRequest.toUserDTO()
+        val userDTO = dCreateUserRequest.toUserDto()
         checkRegisterPossible(userDTO)
-        userRepository.save(userDTO.toUser())
-        branchService.createBranch(dCreateUserRequest.toBranchDTO())
+        userRepository.save(userDTO.toEntity())
+        branchService.createBranch(dCreateUserRequest.toBranchDto())
         return true
     }
 
     @Transactional
     fun updateUser(dUpdateUserRequest: DUpdateUserRequest): Boolean {
-        val userDTO = dUpdateUserRequest.toUserDTO()
+        val userDTO = dUpdateUserRequest.toUserDto()
         userRepository.findById(dUpdateUserRequest.userId)
             .orElseThrow { UserNotFoundException() }
             .update(userDTO)
-        branchService.updateBranch(dUpdateUserRequest.toBranchDTO())
+        branchService.updateBranch(dUpdateUserRequest.toBranchDto())
         return true
     }
 

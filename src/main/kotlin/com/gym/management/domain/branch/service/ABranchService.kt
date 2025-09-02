@@ -2,7 +2,7 @@ package com.gym.management.domain.branch.service
 
 import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.branch.BranchNotFoundException
-import com.gym.management.domain.branch.model.BranchDTOMapper.toBranchDTO
+import com.gym.management.domain.branch.model.BranchDTOMapper.toBranchDto
 import com.gym.management.domain.branch.model.BranchMapper.toDto
 import com.gym.management.domain.branch.model.request.ACreateBranchRequest
 import com.gym.management.domain.branch.model.request.AUpdateBranchRequest
@@ -16,10 +16,10 @@ class ABranchService(
     private val branchRepository: BranchRepository,
 ) {
     fun createBranch(aCreateBranchRequest: ACreateBranchRequest): BranchDTO =
-        branchService.createBranch(aCreateBranchRequest.toBranchDTO())
+        branchService.createBranch(aCreateBranchRequest.toBranchDto())
 
     fun updateBranch(aUpdateBranchRequest: AUpdateBranchRequest): BranchDTO =
-        branchService.updateBranch(aUpdateBranchRequest.toBranchDTO())
+        branchService.updateBranch(aUpdateBranchRequest.toBranchDto())
 
     fun fetchBranches(
         branchId: Int? = null,

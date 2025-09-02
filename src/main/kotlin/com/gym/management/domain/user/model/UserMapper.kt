@@ -5,7 +5,7 @@ import com.gym.management.domain.user.model.entity.User
 import java.time.LocalDateTime
 
 object UserMapper {
-    fun UserDTO.toUser(): User =
+    fun UserDTO.toEntity(): User =
         User(
             userId = this.userId,
             userPassword = this.userPassword,

@@ -2,7 +2,7 @@ package com.gym.management.domain.category.service
 
 import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.category.ProductCategoryNotFoundException
-import com.gym.management.domain.category.model.ProductCategoryDTOMapper.toDto
+import com.gym.management.domain.category.model.ProductCategoryDTOMapper.toProductCategoryDto
 import com.gym.management.domain.category.model.ProductCategoryMapper.toDto
 import com.gym.management.domain.category.model.ProductCategoryMapper.toEntity
 import com.gym.management.domain.category.model.ProductCategoryMapper.update
@@ -18,12 +18,12 @@ class ACategoryService(
     private val productCategoryRepository: ProductCategoryRepository
 ) {
     fun createProductCategory(aCreateProductCategoryRequest: ACreateProductCategoryRequest): ProductCategoryDTO {
-        return productCategoryRepository.save(aCreateProductCategoryRequest.toDto().toEntity())
+        return productCategoryRepository.save(aCreateProductCategoryRequest.toProductCategoryDto().toEntity())
             .toDto()
     }
 
     fun updateProductCategory(aUpdateProductCategoryRequest: AUpdateProductCategoryRequest): ProductCategoryDTO {
-        val productCategoryDTO = aUpdateProductCategoryRequest.toDto()
+        val productCategoryDTO = aUpdateProductCategoryRequest.toProductCategoryDto()
         return productCategoryRepository.findById(
             ProductCategoryId(
                 productCategoryDTO.productCategoryCode,

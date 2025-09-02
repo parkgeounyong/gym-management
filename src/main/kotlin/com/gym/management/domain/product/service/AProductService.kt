@@ -3,11 +3,11 @@ package com.gym.management.domain.product.service
 import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.product.ProductNotFoundException
 import com.gym.management.config.exception.custom.product.ProductTemplateNotFoundException
-import com.gym.management.domain.product.model.ProductDTOMapper.toDto
+import com.gym.management.domain.product.model.ProductDTOMapper.toProductDto
 import com.gym.management.domain.product.model.ProductMapper.toDto
 import com.gym.management.domain.product.model.ProductMapper.toEntity
 import com.gym.management.domain.product.model.ProductMapper.update
-import com.gym.management.domain.product.model.ProductTemplateDTOMapper.toDto
+import com.gym.management.domain.product.model.ProductTemplateDTOMapper.toProductTemplateDto
 import com.gym.management.domain.product.model.ProductTemplateMapper.toDto
 import com.gym.management.domain.product.model.ProductTemplateMapper.toEntity
 import com.gym.management.domain.product.model.ProductTemplateMapper.update
@@ -32,7 +32,7 @@ class AProductService(
     fun createProductTemplates(createProductTemplateRequest: CreateProductTemplateRequest): ProductTemplateDTO {
         productRepository.findById(ProductId(createProductTemplateRequest.branchId, createProductTemplateRequest.productCode))
             .orElseThrow { ProductNotFoundException() }
-        return productTemplateRepository.save(createProductTemplateRequest.toDto().toEntity())
+        return productTemplateRepository.save(createProductTemplateRequest.toProductTemplateDto().toEntity())
             .toDto()
     }
 
@@ -45,7 +45,7 @@ class AProductService(
                 updateProductTemplateRequest.productCode
             )
         ).orElseThrow { ProductTemplateNotFoundException() }
-            .update(updateProductTemplateRequest.toDto())
+            .update(updateProductTemplateRequest.toProductTemplateDto())
             .toDto()
     }
 
@@ -77,14 +77,14 @@ class AProductService(
     }
 
     fun createProduct(createProductRequest: CreateProductRequest): ProductDTO {
-        return productRepository.save(createProductRequest.toDto().toEntity()).toDto()
+        return productRepository.save(createProductRequest.toProductDto().toEntity()).toDto()
     }
 
     @Transactional
     fun updateProduct(updateProductRequest: UpdateProductRequest): ProductDTO {
         return productRepository.findById(ProductId(updateProductRequest.branchId, updateProductRequest.productCode))
             .orElseThrow { ProductNotFoundException() }
-            .update(updateProductRequest.toDto())
+            .update(updateProductRequest.toProductDto())
             .toDto()
     }
 

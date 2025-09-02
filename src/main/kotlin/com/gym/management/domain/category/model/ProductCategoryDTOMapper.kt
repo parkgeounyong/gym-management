@@ -6,7 +6,7 @@ import com.gym.management.domain.category.model.request.AUpdateProductCategoryRe
 import java.time.LocalDateTime
 
 object ProductCategoryDTOMapper {
-    fun ACreateProductCategoryRequest.toDto(): ProductCategoryDTO =
+    fun ACreateProductCategoryRequest.toProductCategoryDto(): ProductCategoryDTO =
         ProductCategoryDTO(
             productCategoryCode = this.productCategoryCode,
             branchId = this.branchId,
@@ -17,7 +17,7 @@ object ProductCategoryDTOMapper {
             userId = this.userId,
         )
 
-    fun AUpdateProductCategoryRequest.toDto(): ProductCategoryDTO =
+    fun AUpdateProductCategoryRequest.toProductCategoryDto(): ProductCategoryDTO =
         ProductCategoryDTO(
             productCategoryCode = this.productCategoryCode,
             branchId = this.branchId,

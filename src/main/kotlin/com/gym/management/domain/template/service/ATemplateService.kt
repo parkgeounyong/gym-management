@@ -1,7 +1,7 @@
 package com.gym.management.domain.template.service
 
 import com.gym.management.config.exception.custom.template.TemplateNotFoundException
-import com.gym.management.domain.template.model.TemplateDTOMapper.toDTO
+import com.gym.management.domain.template.model.TemplateDTOMapper.toTemplateDto
 import com.gym.management.domain.template.model.TemplateMapper.toDto
 import com.gym.management.domain.template.model.TemplateMapper.toEntity
 import com.gym.management.domain.template.model.TemplateMapper.update
@@ -19,7 +19,7 @@ class ATemplateService(
     private val templateRepository: TemplateRepository,
 ) {
     fun createTemplates(aTemplateCreateRequest: ATemplateCreateRequest): TemplateDTO {
-        return templateRepository.save(aTemplateCreateRequest.toDTO().toEntity())
+        return templateRepository.save(aTemplateCreateRequest.toTemplateDto().toEntity())
             .toDto()
     }
 
@@ -32,7 +32,7 @@ class ATemplateService(
             )
         )
             .orElseThrow { TemplateNotFoundException() }
-            .update(aTemplateUpdateRequest.toDTO())
+            .update(aTemplateUpdateRequest.toTemplateDto())
             .toDto()
     }
 

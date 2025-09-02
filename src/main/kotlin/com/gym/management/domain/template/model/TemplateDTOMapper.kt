@@ -6,7 +6,7 @@ import com.gym.management.domain.template.model.request.ATemplateUpdateRequest
 import java.time.LocalDateTime
 
 object TemplateDTOMapper {
-    fun ATemplateCreateRequest.toDTO(): TemplateDTO =
+    fun ATemplateCreateRequest.toTemplateDto(): TemplateDTO =
         TemplateDTO(
             branchId = this.branchId,
             templateCode = this.templateCode,
@@ -19,7 +19,7 @@ object TemplateDTOMapper {
             templateDeleted = 'N'
         )
 
-    fun ATemplateUpdateRequest.toDTO(): TemplateDTO =
+    fun ATemplateUpdateRequest.toTemplateDto(): TemplateDTO =
         TemplateDTO(
             branchId = this.branchId,
             templateCode = this.templateCode,
