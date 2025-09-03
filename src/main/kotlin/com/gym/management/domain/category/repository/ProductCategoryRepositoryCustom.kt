@@ -1,6 +1,7 @@
 package com.gym.management.domain.category.repository
 
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
+import com.gym.management.domain.category.model.entity.ProductCategory
 
 interface ProductCategoryRepositoryCustom {
     fun countProductCategory(branchId: Int? = null): Int
@@ -11,4 +12,5 @@ interface ProductCategoryRepositoryCustom {
         sortBy: String,
         direction: String
     ): List<ProductCategoryDTO>
-}
+    fun bulkUpsertProductCategory(productCategoryList: List<ProductCategory>)
+    }
