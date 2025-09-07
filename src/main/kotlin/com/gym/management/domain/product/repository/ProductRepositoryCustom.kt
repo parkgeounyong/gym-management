@@ -1,6 +1,7 @@
 package com.gym.management.domain.product.repository
 
 import com.gym.management.domain.product.model.dto.ProductDTO
+import com.gym.management.domain.product.model.entity.Product
 import java.time.LocalDateTime
 
 interface ProductRepositoryCustom {
@@ -13,4 +14,5 @@ interface ProductRepositoryCustom {
         sortBy: String,
         direction: String
     ): List<ProductDTO>
+    fun bulkUpsertProduct(productList: List<Product>)
 }

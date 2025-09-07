@@ -3,16 +3,21 @@ package com.gym.management.domain.product.repository
 import com.gym.management.common.utils.QuerydslUtils
 import com.gym.management.domain.product.model.ProductMapper.toDto
 import com.gym.management.domain.product.model.dto.ProductDTO
+import com.gym.management.domain.product.model.entity.Product
 import com.gym.management.domain.product.model.entity.QProduct
 import com.gym.management.domain.product.model.entity.QProductTemplate
 import com.gym.management.domain.template.model.entity.QTemplate
 import com.querydsl.jpa.impl.JPAQueryFactory
+import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
+import java.sql.Timestamp
 import java.time.LocalDateTime
 
 @Repository
 class ProductRepositoryImpl(
-    private val queryFactory: JPAQueryFactory
+    private val queryFactory: JPAQueryFactory,
+    private val jdbcTemplate: JdbcTemplate
 ) : ProductRepositoryCustom {
     override fun findBy(branchId: Int, localDateTime: LocalDateTime): List<ProductDTO> {
         val product = QProduct.product
@@ -85,5 +90,41 @@ class ProductRepositoryImpl(
             .limit(size.toLong())
             .fetch()
             .map { it.toDto() }
+    }
+
+    @Transactional
+    override fun bulkUpsertProduct(productList: List<Product>) {
+        if (productList.isEmpty()) {
+            return
+        }
+
+        val sql = """
+            INSERT INTO gym_product (
+                branch_id, product_code, proca_code, product_name, 
+                product_price, product_created_at, product_updated_at, 
+                product_deleted, user_id
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (branch_id, product_code)
+            DO UPDATE SET 
+                proca_code = EXCLUDED.proca_code,
+                product_name = EXCLUDED.product_name,
+                product_price = EXCLUDED.product_price,
+                product_updated_at = EXCLUDED.product_updated_at,
+                product_deleted = EXCLUDED.product_deleted,
+                user_id = EXCLUDED.user_id
+        """.trimIndent()
+
+        jdbcTemplate.batchUpdate(sql, productList, 1000) { ps, product ->
+            ps.setInt(1, product.branchId)
+            ps.setString(2, product.productCode)
+            ps.setString(3, product.procaCode)
+            ps.setString(4, product.productName)
+            ps.setBigDecimal(5, product.productPrice)
+            ps.setTimestamp(6, Timestamp.valueOf(product.productCreatedAt))
+            ps.setTimestamp(7, Timestamp.valueOf(product.productUpdatedAt))
+            ps.setString(8, product.productDeleted.toString())
+            ps.setString(9, product.userId)
+        }
     }
 }
