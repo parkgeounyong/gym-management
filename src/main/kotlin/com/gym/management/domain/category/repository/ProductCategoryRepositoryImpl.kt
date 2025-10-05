@@ -6,7 +6,7 @@ import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.model.entity.ProductCategory
 import com.gym.management.domain.category.model.entity.QProductCategory
 import com.querydsl.jpa.impl.JPAQueryFactory
-import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 import java.sql.Timestamp
@@ -14,7 +14,7 @@ import java.sql.Timestamp
 @Repository
 class ProductCategoryRepositoryImpl(
     private val queryFactory: JPAQueryFactory,
-    private val jdbcTemplate: JdbcTemplate
+    private val namedJdbcTemplate: NamedParameterJdbcTemplate
 ) : ProductCategoryRepositoryCustom {
     override fun countProductCategory(branchId: Int?): Int {
         val pc = QProductCategory.productCategory
@@ -46,9 +46,7 @@ class ProductCategoryRepositoryImpl(
 
     @Transactional
     override fun bulkUpsertProductCategory(productCategoryList: List<ProductCategory>) {
-        if (productCategoryList.isEmpty()) {
-            return
-        }
+        if (productCategoryList.isEmpty()) return
 
         val sql = """
             INSERT INTO gym_product_category (
@@ -56,7 +54,11 @@ class ProductCategoryRepositoryImpl(
                 proca_created_at, proca_updated_at, 
                 proca_deleted, user_id
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            VALUES (
+                :procaCode, :branchId, :procaName, 
+                :procaCreatedAt, :procaUpdatedAt, 
+                :procaDeleted, :userId
+            )
             ON CONFLICT (proca_code, branch_id)
             DO UPDATE SET 
                 proca_name = EXCLUDED.proca_name,
@@ -65,15 +67,17 @@ class ProductCategoryRepositoryImpl(
                 user_id = EXCLUDED.user_id
         """.trimIndent()
 
-
-        jdbcTemplate.batchUpdate(sql, productCategoryList, 1000) { ps, productCategory ->
-            ps.setString(1, productCategory.procaCode)
-            ps.setInt(2, productCategory.branchId)
-            ps.setString(3, productCategory.procaName)
-            ps.setTimestamp(4, Timestamp.valueOf(productCategory.procaCreatedAt))
-            ps.setTimestamp(5, Timestamp.valueOf(productCategory.procaUpdatedAt))
-            ps.setString(6, productCategory.procaDeleted.toString())
-            ps.setString(7, productCategory.userId)
+        val params = productCategoryList.map { category ->
+            mutableMapOf<String, Any>().apply {
+                this["procaCode"] = category.procaCode
+                this["branchId"] = category.branchId
+                this["procaName"] = category.procaName
+                this["procaCreatedAt"] = Timestamp.valueOf(category.procaCreatedAt)
+                this["procaUpdatedAt"] = Timestamp.valueOf(category.procaUpdatedAt)
+                this["procaDeleted"] = category.procaDeleted.toString()
+                this["userId"] = category.userId
+            }
         }
+        namedJdbcTemplate.batchUpdate(sql, params.toTypedArray())
     }
 }
