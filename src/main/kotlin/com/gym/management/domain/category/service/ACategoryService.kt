@@ -26,8 +26,8 @@ class ACategoryService(
         val productCategoryDTO = aUpdateProductCategoryRequest.toProductCategoryDto()
         return productCategoryRepository.findById(
             ProductCategoryId(
-                productCategoryDTO.productCategoryCode,
-                productCategoryDTO.branchId
+                productCategoryDTO.branchId,
+                productCategoryDTO.productCategoryCode
             )
         )
             .orElseThrow { ProductCategoryNotFoundException() }
@@ -55,8 +55,8 @@ class ACategoryService(
         )
     }
 
-    fun findBy(procaCode: String, branchId: Int): ProductCategoryDTO {
-        return productCategoryRepository.findById(ProductCategoryId(procaCode, branchId))
+    fun findBy(branchId: Int, procaCode: String): ProductCategoryDTO {
+        return productCategoryRepository.findById(ProductCategoryId(branchId, procaCode))
             .orElseThrow { ProductCategoryNotFoundException() }.toDto()
     }
 }

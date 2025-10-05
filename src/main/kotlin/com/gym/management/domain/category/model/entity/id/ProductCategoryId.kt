@@ -4,8 +4,8 @@ import java.io.Serializable
 
 
 data class ProductCategoryId(
+    var branchId: Int? = null,
 
-    var procaCode: String? = null,
+    var procaCode: String? = null
 
-    var branchId: Int? = null
 ) : Serializable

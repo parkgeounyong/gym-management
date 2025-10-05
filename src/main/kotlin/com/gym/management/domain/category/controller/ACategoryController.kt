@@ -48,6 +48,6 @@ class ACategoryController(
         @PathVariable branchId: Int,
         @PathVariable procaCode: String
     ): ApiResponse<ProductCategoryDTO> {
-        return ApiResponse(data = aCategoryService.findBy(procaCode, branchId))
+        return ApiResponse(data = aCategoryService.findBy(branchId, procaCode))
     }
 }
