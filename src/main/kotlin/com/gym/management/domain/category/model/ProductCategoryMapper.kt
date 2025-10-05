@@ -16,16 +16,6 @@ object ProductCategoryMapper {
             userId = this.userId
         )
 
-    fun ProductCategory.toDto(): ProductCategoryDTO = ProductCategoryDTO(
-        productCategoryCode = this.procaCode,
-        branchId = this.branchId,
-        productCategoryName = this.procaName,
-        productCategoryCreatedAt = this.procaCreatedAt,
-        productCategoryUpdatedAt = this.procaUpdatedAt,
-        productCategoryDeleted = this.procaDeleted,
-        userId = this.userId
-    )
-
     fun ProductCategory.update(productCategoryDTO: ProductCategoryDTO): ProductCategory{
         procaName = productCategoryDTO.productCategoryName
         procaUpdatedAt = LocalDateTime.now()

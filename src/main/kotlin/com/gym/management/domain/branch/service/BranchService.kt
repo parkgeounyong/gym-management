@@ -1,7 +1,7 @@
 package com.gym.management.domain.branch.service
 
 import com.gym.management.config.exception.custom.branch.BranchNotFoundException
-import com.gym.management.domain.branch.model.BranchMapper.toDto
+import com.gym.management.domain.branch.model.BranchDTOMapper.toDto
 import com.gym.management.domain.branch.model.BranchMapper.toEntity
 import com.gym.management.domain.branch.model.BranchMapper.update
 import com.gym.management.domain.branch.model.dto.BranchDTO

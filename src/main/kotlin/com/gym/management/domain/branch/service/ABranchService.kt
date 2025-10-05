@@ -3,7 +3,7 @@ package com.gym.management.domain.branch.service
 import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.branch.BranchNotFoundException
 import com.gym.management.domain.branch.model.BranchDTOMapper.toBranchDto
-import com.gym.management.domain.branch.model.BranchMapper.toDto
+import com.gym.management.domain.branch.model.BranchDTOMapper.toDto
 import com.gym.management.domain.branch.model.request.ACreateBranchRequest
 import com.gym.management.domain.branch.model.request.AUpdateBranchRequest
 import com.gym.management.domain.branch.model.dto.BranchDTO

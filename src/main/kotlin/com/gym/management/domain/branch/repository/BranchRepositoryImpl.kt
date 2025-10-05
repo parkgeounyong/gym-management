@@ -1,7 +1,7 @@
 package com.gym.management.domain.branch.repository
 
 import com.gym.management.common.utils.QuerydslUtils
-import com.gym.management.domain.branch.model.BranchMapper.toDto
+import com.gym.management.domain.branch.model.BranchDTOMapper.toDto
 import com.gym.management.domain.branch.model.dto.BranchDTO
 import com.gym.management.domain.branch.model.entity.QBranch
 import com.querydsl.jpa.impl.JPAQueryFactory

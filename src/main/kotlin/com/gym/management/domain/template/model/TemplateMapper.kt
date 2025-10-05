@@ -26,17 +26,4 @@ object TemplateMapper {
         templateDeleted = templateDTO.templateDeleted
         return this
     }
-
-    fun Template.toDto(): TemplateDTO =
-        TemplateDTO(
-            branchId = this.branchId,
-            templateCode = this.templateCode,
-            templateName = this.templateName,
-            templatePriority = this.templatePriority,
-            templateStartAt = this.templateStartAt,
-            templateEndAt = this.templateEndAt,
-            templateCreatedAt = this.templateCreatedAt,
-            templateUpdatedAt = this.templateUpdatedAt,
-            templateDeleted = this.templateDeleted
-        )
 }

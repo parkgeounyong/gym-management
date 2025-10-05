@@ -1,11 +1,23 @@
 package com.gym.management.domain.product.model
 
 import com.gym.management.domain.product.model.dto.ProductTemplateDTO
+import com.gym.management.domain.product.model.entity.ProductTemplate
 import com.gym.management.domain.product.model.request.CreateProductTemplateRequest
 import com.gym.management.domain.product.model.request.UpdateProductTemplateRequest
 import java.time.LocalDateTime
 
 object ProductTemplateDTOMapper {
+    fun ProductTemplate.toDto() = ProductTemplateDTO(
+        branchId = this.branchId,
+        templateCode = this.templateCode,
+        productCode = this.productCode,
+        proteName = this.proteName,
+        protePrice = this.protePrice,
+        proteCreatedAt = this.proteCreatedAt,
+        proteUpdatedAt = this.proteUpdatedAt,
+        proteDeleted = this.proteDeleted
+    )
+
     fun CreateProductTemplateRequest.toProductTemplateDto(): ProductTemplateDTO =
         ProductTemplateDTO(
             branchId = this.branchId,

@@ -24,15 +24,4 @@ object ProductTemplateMapper {
         proteDeleted = productTemplateDTO.proteDeleted
         return this
     }
-
-    fun ProductTemplate.toDto() = ProductTemplateDTO(
-        branchId = this.branchId,
-        templateCode = this.templateCode,
-        productCode = this.productCode,
-        proteName = this.proteName,
-        protePrice = this.protePrice,
-        proteCreatedAt = this.proteCreatedAt,
-        proteUpdatedAt = this.proteUpdatedAt,
-        proteDeleted = this.proteDeleted
-    )
 }

@@ -1,7 +1,7 @@
 package com.gym.management.domain.product.repository
 
 import com.gym.management.common.utils.QuerydslUtils
-import com.gym.management.domain.product.model.ProductMapper.toDto
+import com.gym.management.domain.product.model.ProductDTOMapper.toDto
 import com.gym.management.domain.product.model.dto.ProductDTO
 import com.gym.management.domain.product.model.entity.Product
 import com.gym.management.domain.product.model.entity.QProduct

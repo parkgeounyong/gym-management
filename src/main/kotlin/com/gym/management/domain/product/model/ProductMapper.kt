@@ -27,17 +27,4 @@ object ProductMapper {
         userId = productDTO.userId
         return this
     }
-
-    fun Product.toDto(): ProductDTO =
-        ProductDTO(
-            productCode = this.productCode,
-            branchId = this.branchId,
-            productCategoryCode = this.procaCode,
-            productName = this.productName,
-            productPrice = this.productPrice,
-            productCreatedAt = this.productCreatedAt,
-            productUpdatedAt = this.productUpdatedAt,
-            productDeleted = this.productDeleted,
-            userId = this.userId
-        )
 }

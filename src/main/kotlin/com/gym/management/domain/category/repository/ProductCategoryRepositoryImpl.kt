@@ -1,7 +1,7 @@
 package com.gym.management.domain.category.repository
 
 import com.gym.management.common.utils.QuerydslUtils
-import com.gym.management.domain.category.model.ProductCategoryMapper.toDto
+import com.gym.management.domain.category.model.ProductCategoryDTOMapper.toDto
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.model.entity.ProductCategory
 import com.gym.management.domain.category.model.entity.QProductCategory

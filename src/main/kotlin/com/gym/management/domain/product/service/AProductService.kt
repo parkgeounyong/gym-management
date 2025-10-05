@@ -4,11 +4,11 @@ import com.gym.management.common.model.PageResponse
 import com.gym.management.config.exception.custom.product.ProductNotFoundException
 import com.gym.management.config.exception.custom.product.ProductTemplateNotFoundException
 import com.gym.management.domain.product.model.ProductDTOMapper.toProductDto
-import com.gym.management.domain.product.model.ProductMapper.toDto
+import com.gym.management.domain.product.model.ProductDTOMapper.toDto
 import com.gym.management.domain.product.model.ProductMapper.toEntity
 import com.gym.management.domain.product.model.ProductMapper.update
 import com.gym.management.domain.product.model.ProductTemplateDTOMapper.toProductTemplateDto
-import com.gym.management.domain.product.model.ProductTemplateMapper.toDto
+import com.gym.management.domain.product.model.ProductTemplateDTOMapper.toDto
 import com.gym.management.domain.product.model.ProductTemplateMapper.toEntity
 import com.gym.management.domain.product.model.ProductTemplateMapper.update
 import com.gym.management.domain.product.model.dto.ProductDTO

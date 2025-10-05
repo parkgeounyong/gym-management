@@ -1,7 +1,7 @@
 package com.gym.management.domain.product.service
 
 import com.gym.management.domain.product.model.ProductDTOMapper.toProductDto
-import com.gym.management.domain.product.model.ProductMapper.toDto
+import com.gym.management.domain.product.model.ProductDTOMapper.toDto
 import com.gym.management.domain.product.model.ProductMapper.toEntity
 import com.gym.management.domain.product.repository.ProductRepository
 import com.gym.management.domain.product.model.dto.ProductDTO

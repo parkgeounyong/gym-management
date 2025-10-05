@@ -2,7 +2,7 @@ package com.gym.management.domain.template.service
 
 import com.gym.management.config.exception.custom.template.TemplateNotFoundException
 import com.gym.management.domain.template.model.TemplateDTOMapper.toTemplateDto
-import com.gym.management.domain.template.model.TemplateMapper.toDto
+import com.gym.management.domain.template.model.TemplateDTOMapper.toDto
 import com.gym.management.domain.template.model.TemplateMapper.toEntity
 import com.gym.management.domain.template.model.TemplateMapper.update
 import com.gym.management.domain.template.model.dto.TemplateDTO

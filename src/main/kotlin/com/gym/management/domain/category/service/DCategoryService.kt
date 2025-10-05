@@ -1,6 +1,6 @@
 package com.gym.management.domain.category.service
 
-import com.gym.management.domain.category.model.ProductCategoryMapper.toDto
+import com.gym.management.domain.category.model.ProductCategoryDTOMapper.toDto
 import com.gym.management.domain.category.model.ProductCategoryMapper.toEntity
 import com.gym.management.domain.category.model.dto.ProductCategoryDTO
 import com.gym.management.domain.category.repository.ProductCategoryRepository

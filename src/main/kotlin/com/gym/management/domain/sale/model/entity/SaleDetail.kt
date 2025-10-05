@@ -1,6 +1,5 @@
 package com.gym.management.domain.sale.model.entity
 
-import com.gym.management.domain.sale.model.dto.SaleDetailDTO
 import com.gym.management.domain.sale.model.entity.id.SaleDetailId
 import jakarta.persistence.*
 import jakarta.validation.constraints.NotNull
@@ -52,16 +51,4 @@ class SaleDetail(
     @NotNull
     @Column(name = "salde_created_at", nullable = false)
     val saldeCreatedAt: LocalDateTime,
-) {
-    constructor(saleDetailDTO: SaleDetailDTO) : this(
-        saleId = saleDetailDTO.saleId,
-        branchId = saleDetailDTO.branchId,
-        saldeOrderSeq = saleDetailDTO.saldeOrderSeq,
-        procaCode = saleDetailDTO.procaCode,
-        productCode = saleDetailDTO.productCode,
-        saldeProductPrice = saleDetailDTO.saldeProductPrice,
-        saldeCount = saleDetailDTO.saldeCount,
-        saldeTotalAmount = saleDetailDTO.saldeTotalAmount,
-        saldeCreatedAt = LocalDateTime.now()
-    )
-}
+)

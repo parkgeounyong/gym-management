@@ -16,17 +16,6 @@ object BranchMapper {
             branchBossUserId = this.branchBossUserId,
         )
 
-    fun Branch.toDto(): BranchDTO = BranchDTO(
-        branchId = this.branchId,
-        branchName = this.branchName,
-        branchAddress = this.branchAddress,
-        branchCreatedAt = this.branchCreatedAt,
-        branchUpdatedAt = this.branchUpdatedAt,
-        branchDeleted = this.branchDeleted,
-        userId = this.userId,
-        branchBossUserId = this.branchBossUserId,
-    )
-
     fun Branch.update(branchDTO: BranchDTO): Branch {
         branchName = branchDTO.branchName
         branchAddress = branchDTO.branchAddress
